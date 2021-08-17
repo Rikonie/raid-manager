@@ -1,2 +1,0 @@
-docker build --rm -t kpakozz96pyc/top-store-client:latest .
-docker push kpakozz96pyc/top-store-client:latest

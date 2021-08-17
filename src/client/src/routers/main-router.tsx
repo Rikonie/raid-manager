@@ -4,6 +4,7 @@ import {LayoutComponent} from "../components/layout/layout";
 import {NotFoundPage} from "../pages/not-found/not-found-page";
 import {HomePage} from "../pages/home/home-page";
 import {NextdoorPage} from "../pages/nextdoor/nextdoor-page";
+import { GuildPage } from "../pages/guild/guild-page";
 
 export const MainRouter: React.FC = () => {
     return (
@@ -12,6 +13,12 @@ export const MainRouter: React.FC = () => {
                 <Route path="/home">
                     <LayoutComponent>
                         <HomePage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/guild">
+                    <LayoutComponent>
+                        <GuildPage/>
                     </LayoutComponent>
                 </Route>
 
