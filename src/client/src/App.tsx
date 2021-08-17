@@ -6,7 +6,6 @@ import {MainRouter} from "./routers/main-router";
 import {Provider} from "react-redux";
 
 const App: React.FC<RootConfig> = ({store}) => {
-
     return (
         <Provider store={store}>
             <BrowserRouter basename={'/'}>
