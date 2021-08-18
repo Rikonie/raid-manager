@@ -1,6 +1,7 @@
 import React from "react";
 import { ClassSelectComponent } from "../../components/class-select/class-select-component";
 import { RoleSelectComponent } from "../../components/role-select/role-select-component";
+import { GenderSelectComponent } from "../../components/gender-select/gender-select-component";
 import styles from ".//guild-page.module.scss";
 
 export const GuildPage = () => {
@@ -19,6 +20,7 @@ export const GuildPage = () => {
            <ClassSelectComponent></ClassSelectComponent>
         </td>
         <td><RoleSelectComponent></RoleSelectComponent></td>
+        <td><GenderSelectComponent></GenderSelectComponent></td>
         </tr>
   <tr>
        <td>Акони</td>
@@ -26,6 +28,7 @@ export const GuildPage = () => {
            <ClassSelectComponent></ClassSelectComponent>
         </td>
         <td><RoleSelectComponent></RoleSelectComponent></td>
+        <td><GenderSelectComponent></GenderSelectComponent></td>
         </tr>
         <tr>
        <td>Друлих</td>
@@ -33,6 +36,7 @@ export const GuildPage = () => {
            <ClassSelectComponent></ClassSelectComponent>
         </td>
         <td><RoleSelectComponent></RoleSelectComponent></td>
+        <td><GenderSelectComponent></GenderSelectComponent></td>
         </tr>
   </table>
         </div>
