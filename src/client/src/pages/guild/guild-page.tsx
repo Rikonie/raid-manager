@@ -3,10 +3,13 @@ import { ClassSelectComponent } from "../../components/class-select/class-select
 import { RoleSelectComponent } from "../../components/role-select/role-select-component";
 import { GenderSelectComponent } from "../../components/gender-select/gender-select-component";
 import styles from ".//guild-page.module.scss";
+import logo from  "../../logo.svg"
 
 export const GuildPage = () => {
     return (
         <div>
+
+            <img src={logo}></img>
           <table className={styles.table}>
    <caption className={styles.table}>Рейдовый состав</caption>
    <tr>
