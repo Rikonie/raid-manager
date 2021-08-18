@@ -5,6 +5,11 @@ import {NotFoundPage} from "../pages/not-found/not-found-page";
 import {HomePage} from "../pages/home/home-page";
 import {NextdoorPage} from "../pages/nextdoor/nextdoor-page";
 import { GuildPage } from "../pages/guild/guild-page";
+import { CompositionPage } from "../pages/composition/composition-page";
+import { StatisticsPage } from "../pages/statistics/statistics-page";
+import { CalculatorPage } from "../pages/calculator/calculator-page";
+import { TimetablePage } from "../pages/timetable/timetable-page";
+import {AuthorizationPage} from "../pages/authorization/authorization-page"
 
 export const MainRouter: React.FC = () => {
     return (
@@ -29,6 +34,36 @@ export const MainRouter: React.FC = () => {
                 <Route path="/nextdoor">
                     <LayoutComponent>
                         <NextdoorPage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/composition">
+                    <LayoutComponent>
+                        <CompositionPage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/statistics">
+                    <LayoutComponent>
+                        <StatisticsPage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/calculator">
+                    <LayoutComponent>
+                        <CalculatorPage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/timetable">
+                    <LayoutComponent>
+                        <TimetablePage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/authorization">
+                    <LayoutComponent>
+                        <AuthorizationPage/>
                     </LayoutComponent>
                 </Route>
 

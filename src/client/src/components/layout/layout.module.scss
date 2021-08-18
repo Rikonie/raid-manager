@@ -1,6 +1,34 @@
-.header {
-    display: block;
-    height: 40px;
-    border-bottom: 1px solid rgb(99, 60, 160);
-    background-color: #c71717;
+.wrapper {
+    display: grid;
+    min-height: 100vh;
+    grid-gap: 0px;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+    "header header"
+    "sidebar content";
 }
+.content {
+    grid-area: content;
+    position: relative;
+  }
+  .header {
+    grid-area: header;
+    background-color: burlywood;
+  }
+  .sidebar {
+    grid-area: sidebar;
+    background-color: aquamarine;
+  }
+  .logo {
+      width: 60px;
+      height: 60px;
+      right: 0px;
+  }
+  .hcontent{
+      display: flex;
+  }
+  .centercontent {
+      flex-grow: 1;
+      text-align: center;
+  }
