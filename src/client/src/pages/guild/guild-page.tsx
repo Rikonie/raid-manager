@@ -13,6 +13,7 @@ export const GuildPage = () => {
     <td>Ник</td>
     <td>Класс</td>
     <td>Роль</td>
+    <td>Пол</td>
    </tr>
    <tr>
        <td>Краколис</td>
