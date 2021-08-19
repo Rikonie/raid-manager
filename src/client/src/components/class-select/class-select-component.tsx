@@ -13,19 +13,32 @@ export enum Clazzes {
     Shaman = 'shaman',
     Monk = 'monk',
     DeathKnight = 'dk',
-    DemonHunter = 'dh'
+    DemonHunter = 'dh',
 }
+
 export class ClassSelectComponentProps {
+    name?: string;
     onSelect?: (selected: Clazzes) => void;
 }
 
-export const ClassSelectComponent: React.FC<ClassSelectComponentProps> = ({onSelect}) => {
+export const ClassSelectComponent: React.FC<ClassSelectComponentProps> = ({onSelect, name}) => {
 
-    const classNames = Object.keys(Clazzes).map(key => Clazzes[key]);
+    const classNames: string[] = Object.keys(Clazzes).map(key => Clazzes[key]);
 
-    const onClassSelect = (event)=>{
-        console.log(event.target.value);
-    }
+    const onClassSelect = (event) => {
+        onSelect(event.target.value);
+    };
+
+    return (
+        <>
+            <span>{name}</span>
+            <select onChange={onClassSelect}>
+                {classNames.map((k: string) =>
+                    <option className={styles[k]} value={k}>{k}</option>
+                )}
+            </select>
+        </>
+    );
 
     // return <select>
     //     <option className={styles[Clazzes.Warrior]} value={Clazzes.Warrior}>Воин</option>
@@ -42,11 +55,5 @@ export const ClassSelectComponent: React.FC<ClassSelectComponentProps> = ({onSel
     //     <option className={styles.dk}>Рыцарь смерти</option>
     // </select>
 
-    return (
-        <select onChange={onClassSelect}>
-            {classNames.map(k=>{
-                return <option className={styles[k]} value={k}>{k}</option>
-            })}
-        </select>
-    );
+
 };

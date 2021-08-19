@@ -1,12 +1,22 @@
 import styles from ".//dickpic.module.scss";
-import React from "react";
+import React, {useState} from "react";
 import {ClassSelectComponent, Clazzes} from "../../components/class-select/class-select-component";
 
-export const DickPicComponent = () => {
+export const DickPicComponent :React.FC<any> = ({test: test}) => {
+
+    const [name, setName] = useState('default');
 
     const onClazzSelect = (selected: Clazzes): void => {
-        console.log('props');
+        setName(selected);
     };
 
-    return <ClassSelectComponent onSelect={onClazzSelect}/>
+    const promptCall = () => {
+        let a = prompt();
+        setName(a);
+    };
+
+    return <>
+        <ClassSelectComponent name={name} onSelect={onClazzSelect}/>
+        <button onClick={promptCall}>name click</button>
+    </>
 };
