@@ -3,9 +3,9 @@ import React from "react";
 export const ClassSelectComponent = () => {
     return (
         <select>
-        <option className={styles.warrior}>Воин</option>
-        <option className={styles.hunter}>Охотник</option>
-        <option className={styles.mage}>Маг</option>
+        <option className={styles.warrior} value="0">Воин</option>
+        <option className={styles.hunter}  value="1">Охотник</option>
+        <option className={styles.mage} value="2">Маг</option>
         <option className={styles.rogue}>Разбойник</option>
         <option className={styles.priest}>Жрец</option>
         <option className={styles.warlock}>Чернокнижник</option>
