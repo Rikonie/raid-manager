@@ -1,5 +1,6 @@
 import React from "react";
+import {UserComponent} from "../../components/authorization-page/authorization-page-component";
 
 export const AuthorizationPage = () => {
     return (
-        <div>Это авторизация</div>)}
+        <div><UserComponent></UserComponent></div>)}
