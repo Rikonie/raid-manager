@@ -7,10 +7,18 @@ import styles from ".//guild-page.module.scss";
 import logo from "../../logo.svg"
 import {useSelector} from "react-redux";
 import {opened} from "../../selectors/home-selector";
+import {HttpClient} from "../../services/api/http-client";
 
 export const GuildPage = () => {
 
     let home = useSelector(opened);
+
+    const httpClient = new HttpClient("http://localhost:3000");
+
+    httpClient.get<any>('/guild',{}).then(r =>
+        // Не делайте так - получить доступ к этим данным в компоненте нельзя, т.к. они получаются ассинхронно
+        console.log(r) // Полученный запрос вывыливается в конссоль
+    );
 
     return (
         <div>

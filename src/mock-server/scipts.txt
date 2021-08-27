@@ -1,0 +1,2 @@
+npm install json-server -g ///устанавливаем сервер
+json-server --watch db.json  ///запускаем сервер
