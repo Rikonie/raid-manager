@@ -34,7 +34,7 @@ func returnRaiders(w http.ResponseWriter, r *http.Request) {
 
 func getRaiders() []Raider {
 	// urlExample := "postgres://username:password@localhost:5432/database_name"
-	conn, err := sqlx.Connect("pgx", "postgres://postgres:postgres_123@localhost:5432/raid")
+	conn, err := sqlx.Connect("pgx", "postgres://raidmanager:raidmanager_pass!@kpakozz96pyc.xyz:5433/raid")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
