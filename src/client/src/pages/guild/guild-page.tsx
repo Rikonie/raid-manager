@@ -5,12 +5,16 @@ import {GenderSelectComponent} from "../../components/gender-select/gender-selec
 import {DickPicComponent} from "../../components/dickpic/dickpic-component";
 import styles from ".//guild-page.module.scss";
 import logo from "../../logo.svg"
+import {useSelector} from "react-redux";
+import {opened} from "../../selectors/home-selector";
 
 export const GuildPage = () => {
+
+    let home = useSelector(opened);
+
     return (
         <div>
-
-            <img src={logo}></img>
+            <div>{home}</div>
             <table className={styles.table}>
                 <caption className={styles.table}>Рейдовый состав</caption>
                 <tr>

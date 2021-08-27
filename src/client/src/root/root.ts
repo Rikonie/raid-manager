@@ -6,7 +6,7 @@ import {homeReducer} from "../store/home-reducer";
 
 export const rootReducer = () =>
     combineReducers({
-        home: homeReducer()
+        home: homeReducer(),
     });
 
 export type RootState = StateType<ReturnType<typeof rootReducer>>;

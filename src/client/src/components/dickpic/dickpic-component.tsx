@@ -1,4 +1,3 @@
-import styles from ".//dickpic.module.scss";
 import React, {useState} from "react";
 import {ClassSelectComponent, Clazzes} from "../../components/class-select/class-select-component";
 
