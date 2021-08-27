@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {ClassSelectComponent} from "../../components/class-select/class-select-component";
 import {RoleSelectComponent} from "../../components/role-select/role-select-component";
 import {GenderSelectComponent} from "../../components/gender-select/gender-select-component";
@@ -8,60 +8,27 @@ import logo from "../../logo.svg"
 import {useSelector} from "react-redux";
 import {opened} from "../../selectors/home-selector";
 import {HttpClient} from "../../services/api/http-client";
+import {useAppDispatch} from "../../store/app-dispatch";
+import {Actions} from "../../store/actions";
+import {guildSelector} from "../../selectors/guild-selector";
+import {Guild} from "../../models/guild";
 
-export enum Clazzes {
-    Warrior = 1,
-    Hunter = 3,
-    Mage = 8,
-    Rogue = 4,
-    Priest = 5,
-    Warlock = 9,
-    Paladin =  2,
-    Druid = 11,
-    Shaman = 7,
-    Monk = 10,
-    DeathKnight = 6,
-    DemonHunter = 12,
-}
 
-class guild {
-    faction: string = "Horde";
-    name: string = "Но не сегодня";
-    realm: string = "Howling Fjord";
-    constructor (guildFaction: string, gulidName: string, guildRealm: string) {
-        this.faction = guildFaction;
-        this.name = gulidName;
-        this.realm = guildRealm;
-        print()
-        {
-            console.log(`Гильдия ${this.name} играет за фракцию ${this.faction} и находится на сервере ${this.realm}`);
-        }
-    }
-}
-class guildMember {
-    name: string;
-    classId: number;
-    rank: number;
-    constructor (memberName: string, memberId: number, memberRank: number) {
-        this.name = memberName;
-        this.classId = memberId;
-        this.rank = memberRank;
-    }
-}
+
 
 export const GuildPage = () => {
 
-    let home = useSelector(opened);
+    let guild = useSelector(guildSelector) as Guild;
+    const dispatch = useAppDispatch();
 
-    const httpClient = new HttpClient("http://localhost:3000");
+     useEffect(() => {
+         dispatch(Actions.guild.guildOpened());
+     }, [dispatch]);
 
-    httpClient.get<any>('/guild',{}).then(r =>
-        // Не делайте так - получить доступ к этим данным в компоненте нельзя, т.к. они получаются ассинхронно
-        console.log('piska',r) // Полученный запрос вывыливается в конссоль
-    );
     return (
         <div>
-            <div>{home}</div>
+            {guild ? <><div>{JSON.stringify(guild)}</div></> : <div>loading</div>}
+
             <table className={styles.table}>
                 <caption className={styles.table}>Рейдовый состав</caption>
                 <tr>

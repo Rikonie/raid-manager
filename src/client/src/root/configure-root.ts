@@ -7,6 +7,7 @@ import {HttpClient} from "../services/api/http-client";
 import {LocalStorageService} from "../services/localStorage";
 import {of} from "rxjs";
 import {HomeApi} from "../services/api/home-api";
+import {GuildService} from "../services/guild-service";
 
 export interface RootConfig {
     store: Store<RootState, RootAction>;
@@ -17,6 +18,7 @@ export async function configureRoot(): Promise<RootConfig> {
     const endpoint = await getConfig();
     const httpClient = new HttpClient(endpoint);
     const homeApi = new HomeApi(httpClient);
+    const guildService = new GuildService(httpClient);
 
     const localStorageService = new LocalStorageService();
 
@@ -29,7 +31,8 @@ export async function configureRoot(): Promise<RootConfig> {
         dependencies: {
             homeApi: homeApi,
             localStorageService: localStorageService,
-            httpClient: httpClient
+            httpClient: httpClient,
+            guildService: guildService
         },
     });
 
@@ -44,5 +47,5 @@ export async function configureRoot(): Promise<RootConfig> {
 }
 
 function getConfig(): Promise<string> {
-    return  of("http://kpakozz96pyc.xyz:90//").toPromise();
+    return  of("http://localhost:3000").toPromise();
 }
