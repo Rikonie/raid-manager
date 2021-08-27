@@ -9,6 +9,46 @@ import {useSelector} from "react-redux";
 import {opened} from "../../selectors/home-selector";
 import {HttpClient} from "../../services/api/http-client";
 
+export enum Clazzes {
+    Warrior = 1,
+    Hunter = 3,
+    Mage = 8,
+    Rogue = 4,
+    Priest = 5,
+    Warlock = 9,
+    Paladin =  2,
+    Druid = 11,
+    Shaman = 7,
+    Monk = 10,
+    DeathKnight = 6,
+    DemonHunter = 12,
+}
+
+class guild {
+    faction: string = "Horde";
+    name: string = "Но не сегодня";
+    realm: string = "Howling Fjord";
+    constructor (guildFaction: string, gulidName: string, guildRealm: string) {
+        this.faction = guildFaction;
+        this.name = gulidName;
+        this.realm = guildRealm;
+        print()
+        {
+            console.log(`Гильдия ${this.name} играет за фракцию ${this.faction} и находится на сервере ${this.realm}`);
+        }
+    }
+}
+class guildMember {
+    name: string;
+    classId: number;
+    rank: number;
+    constructor (memberName: string, memberId: number, memberRank: number) {
+        this.name = memberName;
+        this.classId = memberId;
+        this.rank = memberRank;
+    }
+}
+
 export const GuildPage = () => {
 
     let home = useSelector(opened);
@@ -17,9 +57,8 @@ export const GuildPage = () => {
 
     httpClient.get<any>('/guild',{}).then(r =>
         // Не делайте так - получить доступ к этим данным в компоненте нельзя, т.к. они получаются ассинхронно
-        console.log(r) // Полученный запрос вывыливается в конссоль
+        console.log('piska',r) // Полученный запрос вывыливается в конссоль
     );
-
     return (
         <div>
             <div>{home}</div>
@@ -31,33 +70,6 @@ export const GuildPage = () => {
                     <td>Роль</td>
                     <td>Пол</td>
                     <td>DickPic</td>
-                </tr>
-                <tr>
-                    <td>Краколис</td>
-                    <td>
-                        <ClassSelectComponent></ClassSelectComponent>
-                    </td>
-                    <td><RoleSelectComponent></RoleSelectComponent></td>
-                    <td><GenderSelectComponent></GenderSelectComponent></td>
-                    <td><DickPicComponent></DickPicComponent></td>
-                </tr>
-                <tr>
-                    <td>Акони</td>
-                    <td>
-                        <ClassSelectComponent></ClassSelectComponent>
-                    </td>
-                    <td><RoleSelectComponent></RoleSelectComponent></td>
-                    <td><GenderSelectComponent></GenderSelectComponent></td>
-                    <td><DickPicComponent></DickPicComponent></td>
-                </tr>
-                <tr>
-                    <td>Друлих</td>
-                    <td>
-                        <ClassSelectComponent></ClassSelectComponent>
-                    </td>
-                    <td><RoleSelectComponent></RoleSelectComponent></td>
-                    <td><GenderSelectComponent></GenderSelectComponent></td>
-                    <td><DickPicComponent></DickPicComponent></td>
                 </tr>
             </table>
         </div>
