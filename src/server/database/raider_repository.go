@@ -9,49 +9,45 @@ import (
 	"os"
 )
 
-type RaidersRepository struct {
+type RaiderRepository struct {
 	connectionString string
-	tableName string
 }
 
-const (
-	RAIDER_COLLECTION_NAME = "raiders"
-)
-
-func NewRaidersRepository(connectionString string, tableName string) *RaidersRepository {
-	return &RaidersRepository{connectionString: connectionString, tableName: tableName}
+func NewRaiderRepository(connectionString string) *RaiderRepository {
+	return &RaiderRepository{connectionString: connectionString}
 }
 
-func (rr RaidersRepository) GetAll() ([]models.Raider, error)  {
+func (rr RaiderRepository) GetAll() ([]models.Raider, error) {
 	conn, err := sqlx.Connect("pgx", rr.connectionString)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
+		return nil, err
 	}
 	defer conn.Close()
 
 	var raiders []models.Raider
-	err = conn.Select(&raiders, "select * from guildmates")
+	err = conn.Select(&raiders, "select * from raiders")
+	if err !=nil {
+		return nil, err
+	}
 
-
-	return raiders, err
+	return raiders, nil
 }
 
-func (rr RaidersRepository) Save( raider models.Raider) ([]models.Raider, error)  {
+func (rr RaiderRepository) Save(raider models.Raider)  error {
 	conn, err := sqlx.Connect("pgx", rr.connectionString)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		return err
 	}
 	defer conn.Close()
 
-	query := `INSERT INTO guildmates(id, name, classId, level, rank, raceId) VALUES(:id,:name,:classId,:level,:rank,:raceId)`
-
+	query := `INSERT INTO raiders(id, name, class_id, level, rank, race_id) VALUES(:id,:name,:class_id,:level,:rank,:race_id)`
 
 	_, er := conn.NamedExec(query, &raider)
 	if er != nil {
 		log.Fatalln(er)
+		return er
 	}
 
-	return []models.Raider{raider}, er
+	return nil
 }
-

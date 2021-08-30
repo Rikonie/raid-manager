@@ -1,6 +1,6 @@
 package models
 
-type Raider struct {
+type Guildmate struct {
 	Id      int64  `db:"id" json:"id"`
 	Name    string `db:"name" json:"name"`
 	ClassId int64  `db:"class_id" json:"classId"`
