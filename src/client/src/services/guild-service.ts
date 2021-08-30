@@ -15,9 +15,9 @@ export class GuildService implements IGuildService{
         return this.httpClient.get<any>('/guild', {}).then((r:any) =>{
             return new Guild(
                 r?.id,
-                r?.faction?.name,
+                r?.factionName,
                 r?.name,
-                r.realm.name
+                r.realmName
             )
         } )
     }

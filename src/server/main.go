@@ -47,6 +47,11 @@ func main() {
 
 	app.HTTPErrorHandler = CustomHTTPErrorHandler
 
+	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"*"},
+	}))
+
 	// Start server
 	app.Logger.Fatal(app.Start(":8081"))
 }

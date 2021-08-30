@@ -8,7 +8,10 @@ const guildmatePageOpened: RootEpic = (action$, _, {guildmatesService}) =>
     action$.pipe(
         filter(isActionOf(Actions.guild.guildOpened)),
         switchMap((action) => {
-            return guildmatesService.GetGuildmatesInfo().then(r => Actions.guildmate.loadGuildmates.success(r))
+            return guildmatesService.GetGuildmatesInfo().then(r => {
+                console.log(r);
+                return Actions.guildmate.loadGuildmates.success(r);
+            })
         })
     );
 

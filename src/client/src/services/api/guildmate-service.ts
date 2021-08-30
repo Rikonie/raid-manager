@@ -13,13 +13,13 @@ export class GuildmatesService implements IGuildmatesService{
 
 
     GetGuildmatesInfo(): Promise<Guildmate[]> {
-        return this.httpClient.get<any>('/members', {}).then((r:any) =>{
+        return this.httpClient.get<any>('/guildmates', {}).then((r:any) =>{
             return r.map((i: any) => {
                 return new Guildmate(
-                   i?.character?.name,
-                   i?.character?.id,
-                   i?.character?.playable_class?.id,
-                   i.rank
+                   i?.name,
+                   i?.id,
+                   i?.classId,
+                   i?.rank
                 )
             })
 
