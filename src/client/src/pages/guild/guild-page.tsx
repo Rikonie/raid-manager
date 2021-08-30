@@ -12,6 +12,8 @@ import {useAppDispatch} from "../../store/app-dispatch";
 import {Actions} from "../../store/actions";
 import {guildSelector} from "../../selectors/guild-selector";
 import {Guild} from "../../models/guild";
+import {GuildMate} from "../../models/guildmate";
+import {guildMateSelector} from "../../selectors/guildmate-selector";
 
 
 
@@ -25,9 +27,17 @@ export const GuildPage = () => {
          dispatch(Actions.guild.guildOpened());
      }, [dispatch]);
 
+    let guildMate = useSelector(guildMateSelector) as GuildMate;
+    const gildMateDispatch = useAppDispatch();
+
+    useEffect(() => {
+        gildMateDispatch(Actions.guildMate.guildMateOpened());
+    }, [gildMateDispatch]);
+
     return (
         <div>
             {guild ? <><div>{JSON.stringify(guild)}</div></> : <div>loading</div>}
+            {guildMate ? <><div>{JSON.stringify(guildMate)}</div></> : <div>loading</div>}
 
             <table className={styles.table}>
                 <caption className={styles.table}>Рейдовый состав</caption>

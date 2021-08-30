@@ -7,7 +7,6 @@ import {of} from "rxjs";
 const guildPageOpened: RootEpic = (action$, _, {guildService}) =>
     action$.pipe(
         filter(isActionOf(Actions.guild.guildOpened)),
-        debounceTime(5000),
         switchMap((action) => {
             return guildService.GetGuidInfo().then(r => Actions.guild.loadGuild.success(r))
         })

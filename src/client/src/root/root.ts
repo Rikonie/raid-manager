@@ -3,11 +3,13 @@ import {Actions} from "../store/actions";
 import { combineReducers } from "redux";
 import {homeReducer} from "../store/home-reducer";
 import {guildReducer} from "../store/guild-reducer";
+import {guildMateReducer} from "../store/guildmate-reducer";
 
 export const rootReducer = () =>
     combineReducers({
         home: homeReducer(),
-        guild: guildReducer()
+        guild: guildReducer(),
+        guildMate: guildMateReducer()
     });
 
 export type RootState = StateType<ReturnType<typeof rootReducer>>;
