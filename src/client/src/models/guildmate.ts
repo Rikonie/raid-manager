@@ -4,7 +4,7 @@ export class Guildmate {
     name: string;
     rank: number;
 
-    constructor(id: number, classId: number, name: string, rank: number) {
+    constructor(id: number, name: string, classId: number, rank: number) {
         this.name = name;
         this.id = id;
         this.classId = classId;

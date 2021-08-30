@@ -16,8 +16,8 @@ export class GuildmatesService implements IGuildmatesService{
         return this.httpClient.get<any>('/guildmates', {}).then((r:any) =>{
             return r.map((i: any) => {
                 return new Guildmate(
-                   i?.name,
                    i?.id,
+                   i?.name,
                    i?.classId,
                    i?.rank
                 )
