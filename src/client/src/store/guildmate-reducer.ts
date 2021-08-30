@@ -1,14 +1,14 @@
 import {createReducer} from "typesafe-actions";
 import {Actions} from "./actions";
 import {combineReducers} from "redux";
-import {GuildMate} from "../models/guildmate";
+import {Guildmate} from "../models/guildmate";
 
-const guildMate = createReducer<GuildMate[]>(null)
-    .handleAction(Actions.guildMate.loadGuildMate.success, (state, action) => {
+const guildmateList = createReducer<Guildmate[]>(null)
+    .handleAction(Actions.guildmate.loadGuildmates.success, (state, action) => {
         return  action.payload;
     });
 
-export const guildMateReducer = () =>
+export const guildmateReducer = () =>
     combineReducers({
-        guildMate
+        guildmateList
     });

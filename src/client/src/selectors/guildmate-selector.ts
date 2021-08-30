@@ -1,3 +1,3 @@
 import {RootState} from "../root/root";
 
-export const guildMateSelector = (state: RootState) => state.guildMate.guildMate;
+export const guildmatesSelector = (state: RootState) => state.guildmate.guildmateList;
