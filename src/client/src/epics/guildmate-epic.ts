@@ -4,16 +4,14 @@ import {isActionOf} from "typesafe-actions";
 import {Actions} from "../store/actions";
 import {of} from "rxjs";
 
-const guildPageOpened: RootEpic = (action$, _, {guildService}) =>
+const guildmatePageOpened: RootEpic = (action$, _, {guildmatesService}) =>
     action$.pipe(
         filter(isActionOf(Actions.guild.guildOpened)),
         switchMap((action) => {
-            return guildService.GetGuidInfo().then(r => Actions.guild.loadGuild.success(r))
+            return guildmatesService.GetGuildmatesInfo().then(r => Actions.guildmate.loadGuildmates.success(r))
         })
     );
 
-
-
-export const guildEpics = [
-    guildPageOpened
+export const guildmateEpics = [
+    guildmatePageOpened
 ];

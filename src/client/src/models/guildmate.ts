@@ -1,4 +1,4 @@
-class GuildMate {
+export class Guildmate {
     id: number;
     classId: number;
     name: string;

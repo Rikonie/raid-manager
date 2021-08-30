@@ -1,5 +1,6 @@
 import {createAction, createAsyncAction} from "typesafe-actions";
 import {Guild} from "../models/guild";
+import {Guildmate} from "../models/guildmate";
 
 
 const homeOpened = createAction('@@home-opened')<{ text: string }>();
@@ -10,6 +11,13 @@ const loadGuild = createAsyncAction(
     '@@load-guild/success',
     '@@load-guild/failure'
 )<{}, Guild, Error>();
+
+const loadGuildmates = createAsyncAction(
+    '@@load-guildmate/request',
+    '@@load-guildmate/success',
+    '@@load-guildmate/failure'
+)<{}, Guildmate[], Error>();
+
 
 const login = createAction('@@login')<{ name: string, password: string }>();
 const emptyAction = createAction('@@empty-action')<{ text: string }>();
@@ -23,5 +31,9 @@ export const Actions = {
     guild: {
         guildOpened,
         loadGuild
+    },
+    guildmate: {
+        guildOpened,
+        loadGuildmates
     }
 };
