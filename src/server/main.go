@@ -35,6 +35,7 @@ func main() {
 	// Routes
 	app.GET("/", hello)
 	app.GET("/guildmates", guildmateController.ReturnGuildmates)
+	app.GET("/guildmates/:page", guildmateController.ReturnGuildmatesPage)
 	app.GET("/guildmates/:page/:size", guildmateController.ReturnGuildmatesPage)
 
 	app.GET("/raiders", raiderController.ReturnRaiders)
