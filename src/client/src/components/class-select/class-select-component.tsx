@@ -1,20 +1,7 @@
 import styles from ".//class-select.module.scss";
 import React from "react";
+import {Clazzes} from "../../models/enums/clazzes";
 
-export enum Clazzes {
-    Warrior = 'warrior',
-    Hunter = 'hunter',
-    Mage = 'mage',
-    Rogue = 'rogue',
-    Priest = 'priest',
-    Warlock = 'warlock',
-    Paladin = 'paladin',
-    Druid = 'druid',
-    Shaman = 'shaman',
-    Monk = 'monk',
-    DeathKnight = 'dk',
-    DemonHunter = 'dh',
-}
 
 export class ClassSelectComponentProps {
     name?: string;

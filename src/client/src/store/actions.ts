@@ -18,6 +18,12 @@ const loadGuildmates = createAsyncAction(
     '@@load-guildmate/failure'
 )<{}, Guildmate[], Error>();
 
+const loadGuildmatesPage = createAsyncAction(
+    '@@load-guildmate/request',
+    '@@load-guildmate/success',
+    '@@load-guildmate/failure'
+)<{page: number}, Guildmate[], Error>();
+
 
 const login = createAction('@@login')<{ name: string, password: string }>();
 const emptyAction = createAction('@@empty-action')<{ text: string }>();
@@ -34,6 +40,7 @@ export const Actions = {
     },
     guildmate: {
         guildOpened,
-        loadGuildmates
-    }
+        loadGuildmates,
+        loadGuildmatesPage
+    },
 };
