@@ -12,6 +12,7 @@ import {GuildComponent} from "../../components/guld/guild-component";
 import {PageComponent} from "../../components/shared/pagination/pages-button-select-component";
 import {Raider} from "../../models/raider";
 
+
 export const GuildPage = () => {
 
     let guild = useSelector(guildSelector) as Guild;
@@ -36,7 +37,7 @@ export const GuildPage = () => {
 
 
     return (
-        <div>
+        <div className={styles.bla}>
             <PageComponent page={page} pageChange={test}/>
             {guild? <div>
                 <GuildComponent name={guild.name} faction={guild.faction} id={guild.id} realm={guild.realm}>

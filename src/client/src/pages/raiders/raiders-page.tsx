@@ -7,6 +7,7 @@ import {Actions} from "../../store/actions";
 import {RaidersComponent} from "../../components/raiders/raiders-page-component";
 import {PageComponent} from "../../components/shared/pagination/pages-button-select-component";
 
+
 export const RaidersPage = () => {
 
     let raiders = useSelector(raidersSelector) as Raider[];
