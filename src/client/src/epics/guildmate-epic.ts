@@ -1,17 +1,34 @@
 import {RootEpic} from "./root-epic";
-import {debounce, debounceTime, filter, ignoreElements, switchMap, tap} from "rxjs/operators";
+import {debounce, debounceTime, filter, ignoreElements, switchMap, tap, map} from "rxjs/operators";
 import {isActionOf} from "typesafe-actions";
 import {Actions} from "../store/actions";
 import {of} from "rxjs";
 
-const guildmatePageOpened: RootEpic = (action$, _, {guildmatesService}) =>
+// const guildmatePageOpened: RootEpic = (action$, _, {guildmatesService}) =>
+//     action$.pipe(
+//         filter(isActionOf(Actions.guild.guildOpened)),
+//         switchMap((action) => {
+//             return guildmatesService.GetGuildmatesInfo().then(r => Actions.guildmate.loadGuildmates.success(r))
+//         })
+//     );
+
+const guildmatePageOpened: RootEpic = (action$, _, {}) =>
     action$.pipe(
         filter(isActionOf(Actions.guild.guildOpened)),
+        map((action) => {
+            return  Actions.guildmate.loadGuildmatesPage.request({page:1})
+        })
+    );
+
+const guildmatePageLoad: RootEpic = (action$, _, {guildmatesService}) =>
+    action$.pipe(
+        filter(isActionOf(Actions.guildmate.loadGuildmatesPage.request)),
         switchMap((action) => {
-            return guildmatesService.GetGuildmatesInfo().then(r => Actions.guildmate.loadGuildmates.success(r))
+            return guildmatesService.GetGuildmatesInfoPage(action.payload.page).then(r => Actions.guildmate.loadGuildmatesPage.success(r))
         })
     );
 
 export const guildmateEpics = [
-    guildmatePageOpened
+    guildmatePageOpened,
+    guildmatePageLoad
 ];

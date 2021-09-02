@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styles from ".//guild-page.module.scss";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "../../store/app-dispatch";
@@ -6,7 +6,10 @@ import {Actions} from "../../store/actions";
 import {guildSelector} from "../../selectors/guild-selector";
 import {Guild} from "../../models/guild";
 import {Guildmate} from "../../models/guildmate";
-import {guildmatesSelector} from "../../selectors/guildmate-selector";
+import {guildmatesPageSelector} from "../../selectors/guildmate-selector";
+import {GuildmatesComponent} from "../../components/guildmates/guildmates-сomponent";
+import {GuildComponent} from "../../components/guld/guild-component";
+import {PageComponent} from "../../components/guildmates/guildmate-pages-component";
 
 export const GuildPage = () => {
 
@@ -17,23 +20,20 @@ export const GuildPage = () => {
          dispatch(Actions.guild.guildOpened());
      }, [dispatch]);
 
-    let guildmates = useSelector(guildmatesSelector) as Guildmate;
+    let guildmates = useSelector(guildmatesPageSelector) as Guildmate[];
 
+    let [page, SetPage]= useState(1);
+    let test = (a:any) =>{
+        dispatch(Actions.guildmate.loadGuildmatesPage.request({page:a}));
+        SetPage(a);
+    };
     return (
         <div>
-            {guild ? <><div>{JSON.stringify(guild)}</div></> : <div>loading</div>}
-            {guildmates ? <><div>{JSON.stringify(guildmates)}</div></> : <div>loading</div>}
-
-            <table className={styles.table}>
-                <caption className={styles.table}>Рейдовый состав</caption>
-                <tr>
-                    <td>Ник</td>
-                    <td>Класс</td>
-                    <td>Роль</td>
-                    <td>Пол</td>
-                    <td>DickPic</td>
-                </tr>
-            </table>
+            <PageComponent page={page} pageChange={test}/>
+            {guild? <div>
+                <GuildComponent name={guild.name} faction={guild.faction} id={guild.id} realm={guild.realm}>
+                </GuildComponent></div> :<div>Loading</div>}
+            <GuildmatesComponent guildmates={guildmates}></GuildmatesComponent>
         </div>
     );
 };
