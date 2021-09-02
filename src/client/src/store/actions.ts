@@ -1,10 +1,12 @@
 import {createAction, createAsyncAction} from "typesafe-actions";
 import {Guild} from "../models/guild";
 import {Guildmate} from "../models/guildmate";
+import {Raider} from "../models/raider";
 
 
 const homeOpened = createAction('@@home-opened')<{ text: string }>();
 const guildOpened = createAction('@@guild-opened')();
+const raiderOpened = createAction('@@raider-opened')();
 
 const loadGuild = createAsyncAction(
     '@@load-guild/request',
@@ -23,6 +25,18 @@ const loadGuildmatesPage = createAsyncAction(
     '@@load-guildmate/success',
     '@@load-guildmate/failure'
 )<{page: number}, Guildmate[], Error>();
+
+const loadRaiders = createAsyncAction(
+    '@@load-raider/request',
+    '@@load-raider/success',
+    '@@load-raider/failure'
+)<{page: number}, Raider[], Error>();
+
+const createRaider = createAsyncAction(
+    '@@create-raider/request',
+    '@@create-raider/success',
+    '@@create-raider/failure'
+)<Raider, {}, Error>();
 
 
 const login = createAction('@@login')<{ name: string, password: string }>();
@@ -43,4 +57,9 @@ export const Actions = {
         loadGuildmates,
         loadGuildmatesPage
     },
+    raider: {
+        raiderOpened,
+        loadRaiders,
+        createRaider,
+    }
 };

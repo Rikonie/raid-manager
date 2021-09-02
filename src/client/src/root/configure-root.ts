@@ -9,6 +9,7 @@ import {of} from "rxjs";
 import {HomeApi} from "../services/api/home-api";
 import {GuildService} from "../services/guild-service";
 import {GuildmatesService} from "../services/api/guildmate-service";
+import {RaidersService} from "../services/api/raider-service";
 
 export interface RootConfig {
     store: Store<RootState, RootAction>;
@@ -21,6 +22,7 @@ export async function configureRoot(): Promise<RootConfig> {
     const homeApi = new HomeApi(httpClient);
     const guildService = new GuildService(httpClient);
     const guildmatesService = new GuildmatesService(httpClient);
+    const raidersService = new RaidersService(httpClient);
 
     const localStorageService = new LocalStorageService();
 
@@ -35,7 +37,8 @@ export async function configureRoot(): Promise<RootConfig> {
             localStorageService: localStorageService,
             httpClient: httpClient,
             guildService: guildService,
-            guildmatesService: guildmatesService
+            guildmatesService: guildmatesService,
+            raidersService: raidersService,
         },
     });
 

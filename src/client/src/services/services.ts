@@ -3,6 +3,7 @@ import {HttpClient} from "./api/http-client";
 import {IHomeApi} from "./api/home-api";
 import {IGuildService} from "./guild-service";
 import {IGuildmatesService} from "./api/guildmate-service";
+import {IRaidersService} from "./api/raider-service";
 
 export interface Services {
     homeApi: IHomeApi,
@@ -10,5 +11,5 @@ export interface Services {
     httpClient: HttpClient,
     guildService: IGuildService,
     guildmatesService: IGuildmatesService,
-
+    raidersService: IRaidersService,
 }

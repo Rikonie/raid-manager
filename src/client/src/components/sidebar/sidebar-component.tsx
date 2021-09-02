@@ -11,6 +11,8 @@ export const SideBarComponent = () => {
                     <li><Link to="/statistics">Статистика</Link></li>
                     <li><Link to="/calculator">Кальлкулятор рейда</Link></li>
                     <li><Link to="/nextdoor">piska Бродячего</Link></li>
+                    <li><Link to="/raiders">Рейдеры</Link></li>
+
         </ul>
     );
 }
