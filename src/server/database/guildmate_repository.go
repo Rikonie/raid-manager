@@ -75,7 +75,7 @@ func (rr GuildmateRepository) Save(guildmate models.Guildmate) ([]models.Guildma
 
 	_, er := conn.NamedExec(query, &guildmate)
 	if er != nil {
-		log.Fatalln(er)
+		return nil,er
 	}
 
 	return []models.Guildmate{guildmate}, er

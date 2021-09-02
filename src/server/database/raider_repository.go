@@ -4,7 +4,6 @@ import (
 	"fmt"
 	_ "github.com/jackc/pgx/stdlib"
 	"github.com/jmoiron/sqlx"
-	"log"
 	"main/models"
 	"os"
 )
@@ -45,7 +44,6 @@ func (rr RaiderRepository) Save(raider models.Raider)  error {
 
 	_, er := conn.NamedExec(query, &raider)
 	if er != nil {
-		log.Fatalln(er)
 		return er
 	}
 
