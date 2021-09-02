@@ -1,13 +1,11 @@
 import React, {useState} from "react";
-import {ClassSelectComponent, Clazzes} from "../../components/class-select/class-select-component";
+import {ClassSelectComponent} from "../../components/class-select/class-select-component";
+import {Clazzes} from "../../models/enums/clazzes";
 
 export const DickPicComponent :React.FC<any> = ({test: test}) => {
 
     const [name, setName] = useState('default');
 
-    const onClazzSelect = (selected: Clazzes): void => {
-        setName(selected);
-    };
 
     const promptCall = () => {
         let a = prompt();
@@ -15,7 +13,6 @@ export const DickPicComponent :React.FC<any> = ({test: test}) => {
     };
 
     return <>
-        <ClassSelectComponent name={name} onSelect={onClazzSelect}/>
         <button onClick={promptCall}>name click</button>
     </>
 };
