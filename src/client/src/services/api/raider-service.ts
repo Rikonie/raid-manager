@@ -5,6 +5,7 @@ export interface IRaidersService {
     GetRaidersInfo(): Promise<Raider[]>
     GetRaidersInfoPage(page: number): Promise<Raider[]>
     CreateRaider(raider:Raider): Promise<Raider>
+    DeleteRaider(id:number): Promise<number>
 }
 
 export class RaidersService implements IRaidersService{
@@ -41,10 +42,17 @@ export class RaidersService implements IRaidersService{
         } )
     }
 
-    CreateRaider(raider: Raider) : Promise<Raider> {
-        return this.httpClient.post<Raider>(
-            '/raiders',
-            raider
+        CreateRaider(raider: Raider) : Promise<Raider> {
+            return this.httpClient.post<Raider>(
+                '/raiders',
+                raider
+        ).then()
+    }
+
+    DeleteRaider (id: number) : Promise<number> {
+        return this.httpClient.delete<number>(
+            '/raiders/delete/'+id,
+            {}
         ).then()
     }
 }

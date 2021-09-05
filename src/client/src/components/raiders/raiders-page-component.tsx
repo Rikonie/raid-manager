@@ -8,9 +8,10 @@ import styles from "../shared/pagination/button.module.scss";
 
 export class RaidersProps {
     raiders?: Raider [];
+    deleteRaiderClick: (raider: Raider) => void
 }
 
-export const RaidersComponent: React.FC<RaidersProps> = ({raiders}) => {
+export const RaidersComponent: React.FC<RaidersProps> = ({raiders, deleteRaiderClick}) => {
     return (
         <>
             {raiders? <>
@@ -25,7 +26,7 @@ export const RaidersComponent: React.FC<RaidersProps> = ({raiders}) => {
                         <td><RaidersNameComponent name={g.name} classId={g.classId}/></td>
                         <td><RaidersClassComponent classId={g.classId}/></td>
                         <td><RaidersRankComponent rank={g.rank}/></td>
-                        <td><button className={styles.button}>Удалить</button></td>
+                        <td><button className={styles.button} onClick={()=>deleteRaiderClick(g)}>Удалить</button></td>
                     </tr>)}
                 </table>
             </> : <div>loading</div>}

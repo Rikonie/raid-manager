@@ -31,7 +31,6 @@ export const GuildPage = () => {
     };
     let createRaider =(guilmate: Guildmate) => {
         let raider = {...guilmate} as Raider;
-        console.log(raider);
         dispatch(Actions.raider.createRaider.request(raider))
     };
 

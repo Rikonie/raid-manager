@@ -38,6 +38,11 @@ const createRaider = createAsyncAction(
     '@@create-raider/failure'
 )<Raider, {}, Error>();
 
+const deleteRaider = createAsyncAction(
+    '@@delete-raider/request',
+    '@@delete-raider/success',
+    '@@delete-raider/failure'
+)<number, {}, Error>();
 
 const login = createAction('@@login')<{ name: string, password: string }>();
 const emptyAction = createAction('@@empty-action')<{ text: string }>();
@@ -61,5 +66,6 @@ export const Actions = {
         raiderOpened,
         loadRaiders,
         createRaider,
+        deleteRaider,
     }
 };

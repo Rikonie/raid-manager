@@ -22,11 +22,16 @@ export const RaidersPage = () => {
         dispatch(Actions.raider.loadRaiders.request({page:a}));
         SetPage(a);
     };
+
+    let deleteRaider=(raider) =>{
+        dispatch(Actions.raider.deleteRaider.request(raider.id))
+    };
+
     return (
         <div>
             <PageComponent page={page} pageChange={pageChange}/>
             {raiders? <div>
-                <RaidersComponent raiders={raiders}/>
+                <RaidersComponent raiders={raiders} deleteRaiderClick={deleteRaider}/>
             </div> : <div>loading</div>}
         </div>
     );

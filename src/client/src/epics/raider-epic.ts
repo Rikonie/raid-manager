@@ -30,7 +30,25 @@ const raiderCreate: RootEpic = (action$, _, {raidersService}) =>
         )
     );
 
+const raiderDelete: RootEpic = (action$, _, {raidersService}) =>
+    action$.pipe(
+        filter(isActionOf(Actions.raider.deleteRaider.request)),
+        switchMap(x => {
+                return from(raidersService.DeleteRaider(x.payload)).pipe(
+                    map((response) => {
+                        return Actions.raider.deleteRaider.success(response);
+                    }),
+                    catchError(x=>{
+                        return of(Actions.raider.deleteRaider.failure(x));
+                    })
+                )
+            },
+        )
+    );
+
+
 export const raiderEpics = [
     raiderPageOpened,
     raiderCreate,
+    raiderDelete,
 ];
