@@ -30,6 +30,10 @@ export class HttpClient {
         return this.instance.post<ResponseType>(url, params, {headers:headers});
     }
 
+    public delete<ResponseType>(url: string, headers?: any) {
+        return this.instance.delete<ResponseType>(url, {headers:headers});
+    }
+
     public postForm<ResponseType>(url: string, form: FormData) {
         return this.instance.post<ResponseType>(
             url,
