@@ -40,3 +40,16 @@ func (rc RaiderController) CreateRaider(c echo.Context) error {
 
 	return err
 }
+
+func (rc RaiderController) DeleteRaider(c echo.Context) error {
+
+	raiderId:=c.Param("id")
+
+	err := rc.repository.Delete(raiderId)
+
+	if err == nil {
+		c.JSON(http.StatusOK, raiderId)
+	}
+
+	return err
+}

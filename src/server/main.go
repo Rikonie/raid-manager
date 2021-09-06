@@ -40,6 +40,7 @@ func main() {
 
 	app.GET("/raiders", raiderController.ReturnRaiders)
 	app.POST("/raiders", raiderController.CreateRaider)
+	app.DELETE("/raiders/delete/:id", raiderController.DeleteRaider)
 
 	app.GET("/guilds", guildController.ReturnGuilds)
 	app.GET("/guild", guildController.ReturnGuild)

@@ -49,3 +49,21 @@ func (rr RaiderRepository) Save(raider models.Raider)  error {
 
 	return nil
 }
+
+func (rr RaiderRepository) Delete(raiderId string)  error {
+	conn, err := sqlx.Connect("pgx", rr.connectionString)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		return err
+	}
+	defer conn.Close()
+
+	query := `Delete from raiders where id =$1`
+
+	_, er := conn.Exec(query, raiderId)
+	if er != nil {
+		return er
+	}
+
+	return nil
+}
