@@ -10,6 +10,7 @@ import { StatisticsPage } from "../pages/statistics/statistics-page";
 import { CalculatorPage } from "../pages/calculator/calculator-page";
 import { TimetablePage } from "../pages/timetable/timetable-page";
 import {AuthorizationPage} from "../pages/authorization/authorization-page"
+import {RaidersPage} from "../pages/raiders/raiders-page";
 
 export const MainRouter: React.FC = () => {
     return (
@@ -64,6 +65,12 @@ export const MainRouter: React.FC = () => {
                 <Route path="/authorization">
                     <LayoutComponent>
                         <AuthorizationPage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/raiders">
+                    <LayoutComponent>
+                        <RaidersPage/>
                     </LayoutComponent>
                 </Route>
 

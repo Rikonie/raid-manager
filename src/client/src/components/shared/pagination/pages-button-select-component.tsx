@@ -1,4 +1,5 @@
 import React from "react";
+import styles from '../pagination/button.module.scss'
 
 
 class pageProps {
@@ -17,9 +18,9 @@ export const PageComponent: React.FC<pageProps> = ({page, pageChange}) => {
 
     return (
     <div>
-            <button disabled={(page <= 1)} onClick={clickBack}>Назад</button>
+            <button className={styles.button} disabled={(page <= 1)} onClick={clickBack}>Назад</button>
             {page}
-            <button onClick={clickOnWard}>Вперед</button>
+            <button className={styles.button} onClick={clickOnWard}>Вперед</button>
         </div>
     );
 };
