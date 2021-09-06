@@ -5,15 +5,16 @@ import {Clazzes} from "../../models/enums/clazzes";
 
 export class ClassSelectComponentProps {
     name?: string;
-    onSelect?: (selected: Clazzes) => void;
+    onSelect?: (selected: number) => void;
 }
 
 export const ClassSelectComponent: React.FC<ClassSelectComponentProps> = ({onSelect, name}) => {
 
-    const classNames: string[] = Object.keys(Clazzes).map(key => Clazzes[key]);
+    const classNames: string[] = Object.keys(Clazzes).map(key => Clazzes[key])
+        .filter(value => typeof value === 'string') as string[];
 
     const onClassSelect = (event) => {
-        onSelect(event.target.value);
+        onSelect(parseInt(event.target.value));
     };
 
     return (
@@ -21,7 +22,7 @@ export const ClassSelectComponent: React.FC<ClassSelectComponentProps> = ({onSel
             <span>{name}</span>
             <select onChange={onClassSelect}>
                 {classNames.map((k: string) =>
-                    <option className={styles[k]} value={k}>{k}</option>
+                    <option className={styles[k.toLocaleLowerCase()]} value={Clazzes[k]}>{k}</option>
                 )}
             </select>
         </>

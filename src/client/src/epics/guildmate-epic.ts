@@ -1,5 +1,5 @@
 import {RootEpic} from "./root-epic";
-import {debounce, debounceTime, filter, ignoreElements, switchMap, tap, map} from "rxjs/operators";
+import {debounce, debounceTime, filter, ignoreElements, switchMap, tap, map, catchError} from "rxjs/operators";
 import {isActionOf} from "typesafe-actions";
 import {Actions} from "../store/actions";
 import {of} from "rxjs";
@@ -17,6 +17,9 @@ const guildmatePageOpened: RootEpic = (action$, _, {}) =>
         filter(isActionOf(Actions.guild.guildOpened)),
         map((action) => {
             return  Actions.guildmate.loadGuildmatesPage.request({page:1})
+        }),
+        catchError(x=>{
+            return of(Actions.guildmate.loadGuildmatesPage.failure(x))
         })
     );
 
@@ -25,6 +28,9 @@ const guildmatePageLoad: RootEpic = (action$, _, {guildmatesService}) =>
         filter(isActionOf(Actions.guildmate.loadGuildmatesPage.request)),
         switchMap((action) => {
             return guildmatesService.GetGuildmatesInfoPage(action.payload.page).then(r => Actions.guildmate.loadGuildmatesPage.success(r))
+        }),
+        catchError(x=>{
+            return of(Actions.guildmate.loadGuildmatesPage.failure(x))
         })
     );
 

@@ -3,7 +3,7 @@ import {RaidersNameComponent} from "./raiders-name-component";
 import React from "react";
 import {RaidersClassComponent} from "./raiders-class-component";
 import {RaidersRankComponent} from "./raiders-rank-component";
-import styles from "../shared/pagination/button.module.scss";
+import {ButtonComponent} from "../shared/button/button";
 
 
 export class RaidersProps {
@@ -26,7 +26,7 @@ export const RaidersComponent: React.FC<RaidersProps> = ({raiders, deleteRaiderC
                         <td><RaidersNameComponent name={g.name} classId={g.classId}/></td>
                         <td><RaidersClassComponent classId={g.classId}/></td>
                         <td><RaidersRankComponent rank={g.rank}/></td>
-                        <td><button className={styles.button} onClick={()=>deleteRaiderClick(g)}>Удалить</button></td>
+                        <td><ButtonComponent  onClick={()=>deleteRaiderClick(g)}>Удалить</ButtonComponent></td>
                     </tr>)}
                 </table>
             </> : <div>loading</div>}

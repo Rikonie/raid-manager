@@ -14,13 +14,13 @@ export const RaidersPage = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(Actions.raider.raiderOpened());
+        dispatch(Actions.raider.raiderOpened())
     }, [dispatch]);
 
     let [page, SetPage] = useState(1);
     let pageChange = (a:any) => {
         dispatch(Actions.raider.loadRaiders.request({page:a}));
-        SetPage(a);
+        SetPage(a)
     };
 
     let deleteRaider=(raider) =>{

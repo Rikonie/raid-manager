@@ -23,9 +23,8 @@ export class RaidersService implements IRaidersService{
                     i?.classId,
                     i?.rank
                 )
-            })
-
-        } )
+            });
+        } );
     }
 
     GetRaidersInfoPage(page: number): Promise<Raider[]> {
@@ -53,6 +52,6 @@ export class RaidersService implements IRaidersService{
         return this.httpClient.delete<number>(
             '/raiders/delete/'+id,
             {}
-        ).then()
+        ).then();
     }
 }

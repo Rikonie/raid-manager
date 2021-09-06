@@ -7,7 +7,7 @@ class raidersNameProps {
     classId: number;
 }
 
-export const RaidersNameComponent: React.FC<raidersNameProps> = ({name, classId}) => {
+export const RaidersNameComponent: React.FC<raidersNameProps> = ({name, classId = 0}) => {
     return (
         <>
             <span className={styles[Clazzes[classId].toLocaleLowerCase()]}>{name}</span>
