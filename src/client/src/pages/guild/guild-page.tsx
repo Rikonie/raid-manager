@@ -11,7 +11,20 @@ import {GuildmatesComponent} from "../../components/guildmates/guildmates-сompo
 import {GuildComponent} from "../../components/guld/guild-component";
 import {PageComponent} from "../../components/shared/pagination/pages-button-select-component";
 import {Raider} from "../../models/raider";
+import {createRaiderStatusSelector} from "../../selectors/rader-selector";
+import Modal from "react-modal";
+import {ButtonComponent} from "../../components/shared/button/button";
 
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 export const GuildPage = () => {
 
@@ -25,7 +38,7 @@ export const GuildPage = () => {
     let guildmates = useSelector(guildmatesPageSelector) as Guildmate[];
 
     let [page, SetPage]= useState(1);
-    let test = (a:any) =>{
+    let pageChange = (a:any) =>{
         dispatch(Actions.guildmate.loadGuildmatesPage.request({page:a}));
         SetPage(a);
     };
@@ -34,14 +47,25 @@ export const GuildPage = () => {
         dispatch(Actions.raider.createRaider.request(raider))
     };
 
+   let createRaiderStatus = useSelector(createRaiderStatusSelector);
+   let clear = () => {
+       dispatch(Actions.raider.clearCreateRaider());
+    };
+
+
 
     return (
         <div className={styles.bla}>
-            <PageComponent page={page} pageChange={test}/>
+            <PageComponent page={page} pageChange={pageChange}/>
             {guild? <div>
                 <GuildComponent name={guild.name} faction={guild.faction} id={guild.id} realm={guild.realm}>
                 </GuildComponent></div> :<div>Loading</div>}
-                <GuildmatesComponent guildmates={guildmates} createRaiderClick={createRaider}></GuildmatesComponent>
+                <GuildmatesComponent guildmates={guildmates} createRaiderClick={createRaider}/>
+            <Modal style={customStyles} onRequestClose={clear} isOpen={!!createRaiderStatus}>
+                <div className={styles.error}>{createRaiderStatus}</div>
+                <ButtonComponent onClick={clear}>Ok</ButtonComponent>
+            </Modal>
+
         </div>
     );
 };

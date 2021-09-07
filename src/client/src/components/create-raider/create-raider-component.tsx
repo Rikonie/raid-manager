@@ -34,7 +34,7 @@ export const CreateRaiderComponent: React.FC<any> = () => {
             <p>Класс: <ClassSelectComponent onSelect={(e) => {
                 setClassId(e)
             }}/></p>
-            <p>Звание: <RankSelectComponent defaultValue={-1} onSelect={(e) =>{
+            <p>Звание: <RankSelectComponent onSelect={(e) =>{
             setRank(e)
             }}/></p>
             <p>id: <input type="number" placeholder="Введите id" onChange={IdChange}/></p>
