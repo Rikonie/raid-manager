@@ -1,26 +1,28 @@
 import React from "react";
-import styles from '../pagination/button.module.scss'
+import styles from "./pages-button-select-component.module.scss"
+import {ButtonComponent} from "../button/button";
 
 
 class pageProps {
     page: number;
-    pageChange: (a:number) => void
+    pageChange: (a: number) => void
 }
+
 export const PageComponent: React.FC<pageProps> = ({page, pageChange}) => {
-    let clickBack = (a:any) => {
-        pageChange (page-1)
+    let clickBack = () => {
+        pageChange(page - 1)
 
     };
 
-    let clickOnWard = (a:any) => {
-        pageChange (page+1)
+    let clickOnWard = () => {
+        pageChange(page + 1)
     };
 
     return (
-    <div>
-            <button className={styles.button} disabled={(page <= 1)} onClick={clickBack}>Назад</button>
-            {page}
-            <button className={styles.button} onClick={clickOnWard}>Вперед</button>
+        <div>
+            <ButtonComponent disabled={(page <= 1)} onClick={clickBack}>Назад</ButtonComponent>
+            <span className={styles.number}>{page}</span>
+            <ButtonComponent onClick={clickOnWard}>Вперед</ButtonComponent>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 export enum Ranks {
+   Unknown = -1,
    Guild_Master = 0,
    Officer = 1,
    Raider = 2,

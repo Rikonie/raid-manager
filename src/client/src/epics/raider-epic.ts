@@ -8,7 +8,10 @@ const raiderPageOpened: RootEpic = (action$, _, {raidersService}) =>
     action$.pipe(
         filter(isActionOf(Actions.raider.raiderOpened)),
         switchMap((action) => {
-            return raidersService.GetRaidersInfoPage(1).then(r => Actions.raider.loadRaiders.success(r))
+            return raidersService.GetRaidersInfoPage(1).then(r => Actions.raider.loadRaiders.success(r));
+        }),
+        catchError(x=>{
+            return of(Actions.raider.loadRaiders.failure(x));
         })
     );
 

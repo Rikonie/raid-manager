@@ -11,14 +11,14 @@ export const UserComponent: React.FC<any> = () => {
 
     const UserChange = (event) => {
         setUser(event.target.value);
-    }
+    };
     const UserPasswordChange = (event) => {
         setUserPassword(event.target.value);
-    }
+    };
 
     const login = ()=>{
         dispatch(Actions.home.login({name: user, password: userPassword}));
-    }
+    };
     return <>
         <div>
             <h1> Имя: {user} </h1>

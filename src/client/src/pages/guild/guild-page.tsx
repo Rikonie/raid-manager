@@ -29,7 +29,7 @@ export const GuildPage = () => {
         dispatch(Actions.guildmate.loadGuildmatesPage.request({page:a}));
         SetPage(a);
     };
-    let createRaider =(guilmate: Guildmate) => {
+    let createRaider = (guilmate: Guildmate) => {
         let raider = {...guilmate} as Raider;
         dispatch(Actions.raider.createRaider.request(raider))
     };

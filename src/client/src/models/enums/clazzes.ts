@@ -11,4 +11,5 @@ export enum Clazzes {
     Monk = 10,
     DeathKnight = 6,
     DemonHunter = 12,
+    Unknown = 0
 }

@@ -11,6 +11,7 @@ import { CalculatorPage } from "../pages/calculator/calculator-page";
 import { TimetablePage } from "../pages/timetable/timetable-page";
 import {AuthorizationPage} from "../pages/authorization/authorization-page"
 import {RaidersPage} from "../pages/raiders/raiders-page";
+import {CreateRaiderPage} from "../pages/create-raider/create-raider-page";
 
 export const MainRouter: React.FC = () => {
     return (
@@ -71,6 +72,12 @@ export const MainRouter: React.FC = () => {
                 <Route path="/raiders">
                     <LayoutComponent>
                         <RaidersPage/>
+                    </LayoutComponent>
+                </Route>
+
+                <Route path="/create_raiders">
+                    <LayoutComponent>
+                        <CreateRaiderPage/>
                     </LayoutComponent>
                 </Route>
 
