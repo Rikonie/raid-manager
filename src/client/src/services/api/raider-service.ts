@@ -54,4 +54,16 @@ export class RaidersService implements IRaidersService{
             {}
         ).then();
     }
+
+    CreateEventRaider () : Promise<number> {
+        return this.httpClient.post<any>(
+            '/events',
+            {
+                id: 1,
+                dateTimeStart: (new Date()).getTime(),
+                dateTimeEnd: (new Date()).getTime(),
+                description: 'test'
+            }
+        ).then();
+    }
 }

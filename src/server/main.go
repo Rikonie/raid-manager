@@ -24,12 +24,14 @@ func main() {
 	guildmateRepository := database.NewGuildmateRepository(CONNECTION_STRING)
 	guildRepository := database.NewGuildRepository(CONNECTION_STRING)
 	raiderRepository := database.NewRaiderRepository(CONNECTION_STRING)
+	eventRepository := database.NewGuildEventRepository(CONNECTION_STRING)
 
 
 	//Controllers
 	guildController := controllers.NewGuildController(guildRepository)
 	guildmateController := controllers.NewGuildmateController(guildmateRepository)
 	raiderController := controllers.NewRaiderController(raiderRepository)
+	eventController := controllers.NewGuildEventController(eventRepository)
 	//updateDbController := controllers.NewUpdateDbController(guildmateRepository)
 
 	// Routes
@@ -44,6 +46,9 @@ func main() {
 
 	app.GET("/guilds", guildController.ReturnGuilds)
 	app.GET("/guild", guildController.ReturnGuild)
+
+	app.GET("/events", eventController.ReturnEvents)
+	app.POST("/events", eventController.CreateEvent)
 	//app.GET("/update", updateDbController.UpdateGuildmateFromAPI)
 
 	app.HTTPErrorHandler = CustomHTTPErrorHandler

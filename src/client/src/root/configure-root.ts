@@ -53,5 +53,5 @@ export async function configureRoot(): Promise<RootConfig> {
 }
 
 function getConfig(): Promise<string> {
-    return  of("http://kpakozz96pyc.xyz:9091").toPromise();
+    return  of("http://localhost:8081").toPromise();
 }
