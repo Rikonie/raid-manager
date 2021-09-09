@@ -11,7 +11,6 @@ export class GuildmatesProps {
 }
 
 export const GuildmatesComponent: React.FC<GuildmatesProps> = ({guildmates, createRaiderClick}) => {
-
     return (
         <>
             {guildmates ? <>

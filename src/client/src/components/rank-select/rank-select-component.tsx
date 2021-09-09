@@ -7,7 +7,7 @@ export class RankSelectComponentProps {
     defaultValue?: any;
 }
 
-export const RankSelectComponent: React.FC<RankSelectComponentProps> = ({onSelect, rank, defaultValue}) => {
+export const RankSelectComponent: React.FC<RankSelectComponentProps> = ({onSelect, rank, defaultValue = Ranks.Unknown}) => {
     const rankNames: string[] = Object.keys(Ranks).map(key => Ranks[key])
         .filter(value => typeof value === 'string') as string[];
 

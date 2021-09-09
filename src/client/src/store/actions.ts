@@ -43,11 +43,12 @@ const deleteRaider = createAsyncAction(
     '@@delete-raider/request',
     '@@delete-raider/success',
     '@@delete-raider/failure'
-)<number, {}, Error>();
+)<number, number, Error>();
 
 const login = createAction('@@login')<{ name: string, password: string }>();
 const emptyAction = createAction('@@empty-action')<{ text: string }>();
 const createRaid = createAction('@@create-raid')<Raid>();
+const clearCreateRaider = createAction('@@clear-raider')();
 
 export const Actions = {
     home: {
@@ -70,5 +71,6 @@ export const Actions = {
         loadRaiders,
         createRaider,
         deleteRaider,
+        clearCreateRaider
     }
 };
