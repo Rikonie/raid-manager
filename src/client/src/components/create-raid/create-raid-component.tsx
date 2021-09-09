@@ -2,50 +2,68 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {Actions} from "../../store/actions";
 import {ButtonComponent} from "../shared/button/button";
-
-export class Raid {
-    data: Date;
-    description: string;
-
-    constructor(data: Date, description: string) {
-        this.data = data;
-        this.description = description;
-    }
-}
+import {Raid} from "../../models/raidEvent";
 
 export const CreateRaidComponent: React.FC<any> = () => {
-    const [data, setData] = useState<Date>(new Date());
-    const [description, setDescription] = useState<string>('');
+    const [raidDate, setRaidDate] = useState<Date | null>(null);
+    const [description, setDescription] = useState<string | null>(null);
+    const [raidHours, setRaidHours] = useState<number | null>(null);
+    const [raidMinutes, setRaidMinutes] = useState<number | null>(null);
+    const [raidDateTimeComputed, setRaidDateTimeComputed] = useState<Date|null>(null);
+    const [showDescription, setShowDescription] = useState<boolean>(false);
 
     const dispatch = useDispatch();
     const create = () => {
-        let newRaid: Raid = new Raid(data, description);
+        let d = new Date(raidDate.setHours(raidHours, raidMinutes));
+        setRaidDateTimeComputed(d);
+        let newRaid: Raid = new Raid(d, description);
         console.log("создаем событие", newRaid);
-        dispatch(Actions.home.createRaid(newRaid))
+        dispatch(Actions.raidEvent.createRaid.success(newRaid));
+        setShowDescription(true);
     };
 
     const DataChange = (event) => {
-        console.log(event.currentTarget.value)
-        setData(new Date(event.target.value))
+        setRaidDate(new Date(event.target.value))
     };
 
     const DescriptionChange = (event) => {
         setDescription(event.target.value)
     };
 
+    const HoursChange = (event) => {
+        setRaidHours(parseInt(event.target.value))
+    };
+
+    const MinutesChange = (event) => {
+        setRaidMinutes(parseInt(event.target.value))
+    };
+
     return (
         <>
             <div>
                 <p>Дата: <input type="Date" onChange={DataChange}/></p>
+                <p>Час: <select onChange={HoursChange}>
+                    {["Не выбрано",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].map((n:number) =>
+                        <option value={n}>{n}</option>)}
+                </select>
+                </p>
+                <p>Минуты: <select onChange={MinutesChange}>
+                    {["Не выбрано",5,10,15,20,25,30,35,40,45,50,55].map((n:number) =>
+                        <option value={n}>{n}</option>)}
+                </select>
+                </p>
                 <p>Описание: <input type="string" onChange={DescriptionChange}/></p>
             </div>
             <div>
-                {data?.toDateString()}
+                {raidDateTimeComputed?.toString()}
             </div>
             <div>
-                {description}
+                {showDescription ? description: null}
             </div>
-            <ButtonComponent onClick={create} title={'Создать событие'}/>
+            <ButtonComponent disabled={(description == null) ||
+            (raidDate == null) ||
+            (raidMinutes == null) ||
+            (raidHours == null)} onClick={create} title={'Создать событие'}/>
         </>
     )
 };

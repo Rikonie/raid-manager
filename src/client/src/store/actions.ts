@@ -2,7 +2,7 @@ import {createAction, createAsyncAction} from "typesafe-actions";
 import {Guild} from "../models/guild";
 import {Guildmate} from "../models/guildmate";
 import {Raider} from "../models/raider";
-import {Raid} from "../components/create-raid/create-raid-component";
+import {Raid} from "../models/raidEvent";
 
 
 const homeOpened = createAction('@@home-opened')<{ text: string }>();
@@ -45,9 +45,14 @@ const deleteRaider = createAsyncAction(
     '@@delete-raider/failure'
 )<number, number, Error>();
 
+const createRaid = createAsyncAction(
+    '@@create-raid/request',
+    '@@create-raid/success',
+    '@@create-raid/failure'
+)<Raid, {}, Error>();
+
 const login = createAction('@@login')<{ name: string, password: string }>();
 const emptyAction = createAction('@@empty-action')<{ text: string }>();
-const createRaid = createAction('@@create-raid')<Raid>();
 const clearCreateRaider = createAction('@@clear-raider')();
 
 export const Actions = {
@@ -55,7 +60,6 @@ export const Actions = {
         login,
         homeOpened,
         emptyAction,
-        createRaid
     },
     guild: {
         guildOpened,
@@ -72,5 +76,8 @@ export const Actions = {
         createRaider,
         deleteRaider,
         clearCreateRaider
+    },
+    raidEvent: {
+        createRaid
     }
 };
