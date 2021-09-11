@@ -1,5 +1,5 @@
-import {Raider} from "../../models/raider";
-import {HttpClient} from "./http-client";
+import {Raider} from "../models/raider";
+import {HttpClient} from "./api/http-client";
 
 export interface IRaidersService {
     GetRaidersInfo(): Promise<Raider[]>

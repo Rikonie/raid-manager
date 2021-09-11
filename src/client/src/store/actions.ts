@@ -54,6 +54,7 @@ const createRaid = createAsyncAction(
 const login = createAction('@@login')<{ name: string, password: string }>();
 const emptyAction = createAction('@@empty-action')<{ text: string }>();
 const clearCreateRaider = createAction('@@clear-raider')();
+const clearCreateRaidEvent = createAction('@@clear-raid')();
 
 export const Actions = {
     home: {
@@ -78,6 +79,7 @@ export const Actions = {
         clearCreateRaider
     },
     raidEvent: {
-        createRaid
+        createRaid,
+        clearCreateRaidEvent,
     }
 };

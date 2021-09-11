@@ -5,13 +5,15 @@ import {homeReducer} from "../store/home-reducer";
 import {guildReducer} from "../store/guild-reducer";
 import {guildmateReducer} from "../store/guildmate-reducer";
 import {raidersReducer} from "../store/raider-reducer";
+import {raidEventReducer} from "../store/raid-event-reducer";
 
 export const rootReducer = () =>
     combineReducers({
         home: homeReducer(),
         guild: guildReducer(),
         guildmate: guildmateReducer(),
-        raider: raidersReducer()
+        raider: raidersReducer(),
+        raidEvent: raidEventReducer(),
     });
 
 export type RootState = StateType<ReturnType<typeof rootReducer>>;

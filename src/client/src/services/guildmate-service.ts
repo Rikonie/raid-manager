@@ -1,6 +1,6 @@
 
-import {HttpClient} from "../api/http-client";
-import {Guildmate} from "../../models/guildmate";
+import {HttpClient} from "./api/http-client";
+import {Guildmate} from "../models/guildmate";
 
 export interface IGuildmatesService {
     GetGuildmatesInfo(): Promise<Guildmate[]>

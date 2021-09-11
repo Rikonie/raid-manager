@@ -8,8 +8,9 @@ import {LocalStorageService} from "../services/localStorage";
 import {of} from "rxjs";
 import {HomeApi} from "../services/api/home-api";
 import {GuildService} from "../services/guild-service";
-import {GuildmatesService} from "../services/api/guildmate-service";
-import {RaidersService} from "../services/api/raider-service";
+import {GuildmatesService} from "../services/guildmate-service";
+import {RaidersService} from "../services/raider-service";
+import {RaidEventService} from "../services/raid-event-service";
 
 export interface RootConfig {
     store: Store<RootState, RootAction>;
@@ -23,6 +24,7 @@ export async function configureRoot(): Promise<RootConfig> {
     const guildService = new GuildService(httpClient);
     const guildmatesService = new GuildmatesService(httpClient);
     const raidersService = new RaidersService(httpClient);
+    const raidEventService = new RaidEventService(httpClient);
 
     const localStorageService = new LocalStorageService();
 
@@ -39,6 +41,7 @@ export async function configureRoot(): Promise<RootConfig> {
             guildService: guildService,
             guildmatesService: guildmatesService,
             raidersService: raidersService,
+            raidEventService: raidEventService,
         },
     });
 

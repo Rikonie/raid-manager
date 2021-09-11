@@ -2,8 +2,9 @@ import {LocalStorageService} from "./localStorage";
 import {HttpClient} from "./api/http-client";
 import {IHomeApi} from "./api/home-api";
 import {IGuildService} from "./guild-service";
-import {IGuildmatesService} from "./api/guildmate-service";
-import {IRaidersService} from "./api/raider-service";
+import {IGuildmatesService} from "./guildmate-service";
+import {IRaidersService} from "./raider-service";
+import {IRaidEventService} from "./raid-event-service";
 
 export interface Services {
     homeApi: IHomeApi,
@@ -12,4 +13,5 @@ export interface Services {
     guildService: IGuildService,
     guildmatesService: IGuildmatesService,
     raidersService: IRaidersService,
+    raidEventService: IRaidEventService
 }
