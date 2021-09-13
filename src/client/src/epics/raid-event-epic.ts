@@ -19,6 +19,18 @@ const raidEventCreate: RootEpic = (action$, _, {raidEventService}) =>
       })
     );
 
+const EventPageOpened: RootEpic = (action$, _, {raidEventService}) =>
+    action$.pipe(
+        filter(isActionOf(Actions.calendar.calendarOpened)),
+        switchMap((action) => {
+            return raidEventService.GetEventInfo().then(r => Actions.calendar.loadEvents.success(r))
+        }),
+        catchError(x=>{
+            return of(Actions.calendar.loadEvents.failure(x))
+        })
+    );
+
 export const raidEventEpics = [
     raidEventCreate,
+    EventPageOpened
 ];

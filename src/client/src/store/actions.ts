@@ -8,6 +8,7 @@ import {Raid} from "../models/raidEvent";
 const homeOpened = createAction('@@home-opened')<{ text: string }>();
 const guildOpened = createAction('@@guild-opened')();
 const raiderOpened = createAction('@@raider-opened')();
+const calendarOpened = createAction('@@calendar-opened')();
 
 const loadGuild = createAsyncAction(
     '@@load-guild/request',
@@ -20,6 +21,12 @@ const loadGuildmates = createAsyncAction(
     '@@load-guildmate/success',
     '@@load-guildmate/failure'
 )<{}, Guildmate[], Error>();
+
+const loadEvents = createAsyncAction(
+    '@@load-events/request',
+    '@@load-events/success',
+    '@@load-events/failure'
+)<{}, Raid[], Error>();
 
 const loadGuildmatesPage = createAsyncAction(
     '@@load-guildmate/request',
@@ -81,5 +88,9 @@ export const Actions = {
     raidEvent: {
         createRaid,
         clearCreateRaidEvent,
+    },
+    calendar: {
+        calendarOpened,
+        loadEvents,
     }
 };
