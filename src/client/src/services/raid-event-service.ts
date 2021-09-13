@@ -3,6 +3,7 @@ import {Raid} from "../models/raidEvent";
 
 export interface IRaidEventService {
     CreateRaid(raid:Raid): Promise<Raid>
+    GetEventInfo() : Promise<Raid[]>
 }
 
 export class RaidEventService implements IRaidEventService{
@@ -18,4 +19,15 @@ export class RaidEventService implements IRaidEventService{
                 }
             ).then()
         }
+    GetEventInfo(): Promise<Raid[]> {
+        return this.httpClient.get<any>('/events', {}).then((r:any) =>{
+            return r.map((i: any) => {
+                return new Raid(
+                    new Date(i?.dateTimeStart),
+                    i?.description,
+                    i?.id
+                )
+            })
+        } )
+    }
     }

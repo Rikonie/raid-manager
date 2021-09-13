@@ -28,17 +28,38 @@ module.exports = {
             },
             {
                 test: /\.(scss|css)$/,
+                exclude: [
+                    path.resolve(__dirname, "node_modules"),
+                ],
                 use: [
                     'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            camelCase: true
+                            camelCase: true,
+                            namedExport: true
                         },
                     }, {
-                    loader: 'sass-loader'
-                }],
+                        loader: 'sass-loader',
+                    }],
+            },
+            {
+                test: /\.(scss|css)$/,
+                include: [
+                    path.resolve(__dirname, "node_modules"),
+                ],
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            camelCase: true,
+                            namedExport: true
+                        },
+                    }, {
+                        loader: 'sass-loader',
+                    }],
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/i,
@@ -55,7 +76,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'config' }
+                {from: 'config'}
             ]
         })
     ],
