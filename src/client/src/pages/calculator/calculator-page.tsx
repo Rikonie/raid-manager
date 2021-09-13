@@ -1,5 +1,5 @@
 import React from "react";
-import {RaidersService} from "../../services/api/raider-service";
+import {RaidersService} from "../../services/raider-service";
 import {HttpClient} from "../../services/api/http-client";
 
 export const CalculatorPage = () => {
