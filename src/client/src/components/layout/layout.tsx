@@ -1,40 +1,56 @@
-import React from "react";
-import styles from '../layout/layout.module.scss'
-import logo from  "../../logo.png"
-import { AuthorizationComponent } from "../../components/authorization/authorization-component";
-import {CenterHeaderComponent} from "../../components/center-header/center-header-component"
-import {SideBarComponent} from "../../components/sidebar/sidebar-component"
-import {useSelector} from "react-redux";
-import {userSelector} from "../../selectors/home-selector";
-import {User} from "../../models/user";
-export interface LayoutComponentProps {
-}
+import React, {useState} from "react";
+import {createStyles} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
+import {Theme} from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/menu";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
+import {SidebarComponent} from "../sidebar/sidebar-component";
 
-export const LayoutComponent: React.FC<LayoutComponentProps> = ({children}) => {
-    let user = useSelector(userSelector) as User;
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+        },
+    }),
+);
+
+export const LayoutComponent = ({children}) => {
+    const classes = useStyles();
+    const [drawerOpened, setDrawerOpened] = useState(false);
+    const toggleDrawer = () => {
+        setDrawerOpened(!drawerOpened);
+    };
 
     return (
-        <>
-            <div className={styles.wrapper}>
-                <div className={styles.header}>
-                    <div className={styles.hcontent}>
-
-                        <div>{user?.name ?
-                            <div>{user.name}</div> :
-                            <AuthorizationComponent></AuthorizationComponent>}</div>
-
-                        <div className={styles.centercontent}>
-                            <CenterHeaderComponent></CenterHeaderComponent></div>
-                        <div><img className={styles.logo} src={logo}></img></div>
-                    </div>
-                </div>
-            <div className={styles.sidebar}> <div>
-            <SideBarComponent></SideBarComponent>
+        <div>
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <div>
+                            <IconButton edge="start" className={classes.menuButton} color="inherit"
+                                        aria-label="menu" onClick={toggleDrawer}>
+                                <MenuIcon/> Меню
+                            </IconButton>
+                            <SidebarComponent toggleDrawer={toggleDrawer} drawerOpened={drawerOpened}/>
+                        </div>
+                        <Typography variant="h6" className={classes.title}>
+                        </Typography>
+                        <Button component={Link} to="/authorization" color="inherit">Авторизация</Button>
+                    </Toolbar>
+                </AppBar>
             </div>
-                
-                </div>
-                <div className={styles.content}>{children}</div>
-            </div>
-        </>
+            <div>{children}</div>
+        </div>
     );
 };

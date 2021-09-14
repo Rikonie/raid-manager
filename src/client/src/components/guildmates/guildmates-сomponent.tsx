@@ -3,7 +3,9 @@ import {Guildmate} from "../../models/guildmate";
 import {NameComponent} from "./guildmates-name-component";
 import {ClassComponent} from "./guildmates-class-component";
 import {RankComponent} from "./ranks-component";
-import {ButtonComponent} from "../shared/button/button";
+import Button from '@material-ui/core/Button';
+import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 export class GuildmatesProps {
     guildmates?: Guildmate[];
@@ -14,20 +16,23 @@ export const GuildmatesComponent: React.FC<GuildmatesProps> = ({guildmates, crea
     return (
         <>
             {guildmates ? <>
-                <table>
-                    <caption>Состав гильдии</caption>
-                    <tr>
-                        <td>Ник</td>
-                        <td>Класс</td>
-                        <td>Звание</td>
-                    </tr>
-                    {guildmates.map((g)=><tr>
-                        <td><NameComponent name={g.name} classId={g.classId}/></td>
-                        <td><ClassComponent id={g.classId}/></td>
-                        <td><RankComponent rank={g.rank}/></td>
-                        <td><ButtonComponent  onClick={()=>createRaiderClick(g)}>Создать Рейдера</ButtonComponent></td>
-                    </tr>)}
-                </table>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Ник</TableCell>
+                            <TableCell>Класс</TableCell>
+                            <TableCell>Звание</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {guildmates.map((g)=><TableRow>
+                        <TableCell><NameComponent name={g.name} classId={g.classId}/></TableCell>
+                        <TableCell><ClassComponent id={g.classId}/></TableCell>
+                        <TableCell><RankComponent rank={g.rank}/></TableCell>
+                        <TableCell><Button variant="contained" color="primary" startIcon={<PersonAddIcon/>} onClick={()=>createRaiderClick(g)}>Создать Рейдера</Button></TableCell>
+                    </TableRow>)}
+                    </TableBody>
+                </Table>
             </> : <div>loading</div>}
         </>
     );

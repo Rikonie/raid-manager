@@ -6,7 +6,7 @@ import {Actions} from "../../store/actions";
 import {useAppDispatch} from "../../store/app-dispatch";
 import Modal from "react-modal";
 import styles from "../guild/guild-page.module.scss";
-import {ButtonComponent} from "../../components/shared/button/button";
+import Button from '@material-ui/core/Button';
 
 const customStyles = {
     content: {
@@ -32,6 +32,6 @@ export const CreateRaiderPage = () => {
             <CreateRaiderComponent/>
             <Modal style={customStyles} onRequestClose={clear} isOpen={!!createRaiderStatus}>
                 <div className={styles.error}>{createRaiderStatus}</div>
-                <ButtonComponent onClick={clear}>Ok</ButtonComponent>
+                <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
             </Modal>
         </div>)};

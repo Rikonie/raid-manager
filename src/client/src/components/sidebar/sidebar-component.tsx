@@ -1,19 +1,97 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Box, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {Link, NavLink} from "react-router-dom";
+import HomeIcon from '@material-ui/icons/Home';
+import EventIcon from '@material-ui/icons/Event';
+import GroupIcon from '@material-ui/icons/Group';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import AppsIcon from '@material-ui/icons/Apps';
 
-export const SideBarComponent = () => {
-    return (
-        <ul>
-                    <li><Link to="/home">Главная</Link></li>
-                    <li><Link to="/guild">Гильдия</Link></li>
-                    <li><Link to="/timetable">Расписание рейдов</Link></li>
-                    <li><Link to="/composition">Состав</Link></li>
-                    <li><Link to="/statistics">Статистика</Link></li>
-                    <li><Link to="/calculator">Калькулятор рейда</Link></li>
-                    <li><Link to="/nextdoor">piska Бродячего</Link></li>
-                    <li><Link to="/raiders">Рейдеры</Link></li>
-                    <li><Link to="/create_raiders">Создать рейдера</Link></li>
-                    <li><Link to="/create_raid">Создать рейд в календаре</Link></li>
-        </ul>
-    );
+export class SidebarComponentProps {
+    toggleDrawer?: () => void;
+    drawerOpened?: boolean
 }
+
+export const SidebarComponent: React.FC<SidebarComponentProps> = ({toggleDrawer, drawerOpened}) => {
+    return (
+        <Drawer
+            anchor='left'
+            open={drawerOpened}
+            onClose={toggleDrawer}
+        >
+            <Box
+                sx={{width: 'auto'}}
+                role="presentation"
+                onClick={toggleDrawer}
+                onKeyDown={toggleDrawer}
+            >
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/home">
+                        <ListItemIcon>
+                            <HomeIcon color="primary"/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Главная"}/>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/guild">
+                        <ListItemIcon>
+                            <GroupIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Гильдия"}/>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/raiders">
+                        <ListItemIcon>
+                            <GroupIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Рейдеры"}/>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/timetable">
+                        <ListItemIcon>
+                            <EventIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Календарь"}/>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/statistics">
+                        <ListItemIcon>
+                            <EqualizerIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Статистика"}/>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/calculator">
+                        <ListItemIcon>
+                            <AppsIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Калькулятор рейда"}/>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/create_raiders">
+                        <ListItemIcon>
+                            <GroupAddIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Создать рейдера"}/>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/create_raid">
+                        <ListItemIcon>
+                            <AddBoxIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Создать событие"}/>
+                    </ListItem>
+                </List>
+            </Box>
+        </Drawer>
+    );
+};

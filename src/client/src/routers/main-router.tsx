@@ -3,9 +3,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import {LayoutComponent} from "../components/layout/layout";
 import {NotFoundPage} from "../pages/not-found/not-found-page";
 import {HomePage} from "../pages/home/home-page";
-import {NextdoorPage} from "../pages/nextdoor/nextdoor-page";
 import { GuildPage } from "../pages/guild/guild-page";
-import { CompositionPage } from "../pages/composition/composition-page";
 import { StatisticsPage } from "../pages/statistics/statistics-page";
 import { CalculatorPage } from "../pages/calculator/calculator-page";
 import { TimetablePage } from "../pages/timetable/timetable-page";
@@ -32,18 +30,6 @@ export const MainRouter: React.FC = () => {
 
                 <Route exact path="/">
                     <Redirect to="/home"/>
-                </Route>
-
-                <Route path="/nextdoor">
-                    <LayoutComponent>
-                        <NextdoorPage/>
-                    </LayoutComponent>
-                </Route>
-
-                <Route path="/composition">
-                    <LayoutComponent>
-                        <CompositionPage/>
-                    </LayoutComponent>
                 </Route>
 
                 <Route path="/statistics">
