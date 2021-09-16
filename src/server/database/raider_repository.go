@@ -4,6 +4,7 @@ import (
 	"fmt"
 	_ "github.com/jackc/pgx/stdlib"
 	"github.com/jmoiron/sqlx"
+	"log"
 	"main/models"
 	"os"
 )
@@ -66,4 +67,39 @@ func (rr RaiderRepository) Delete(raiderId string)  error {
 	}
 
 	return nil
+}
+
+func (rr RaiderRepository) GetPage(size int, page int) ([]models.Raider, int, error) {
+	conn, err := sqlx.Connect("pgx", rr.connectionString)
+	count:= 0;
+	if err != nil {
+		return nil, count, err
+	}
+	defer conn.Close()
+
+	offset := size * (page - 1)
+	list := []models.Raider{}
+
+	SQL := `SELECT * FROM "raiders" ORDER BY "id" LIMIT $2 OFFSET $1`
+
+	rows, err := conn.Queryx(SQL, offset, size)
+	if err != nil {
+		log.Println(err)
+		return nil, count, err
+	}
+	for rows.Next() {
+		g :=models.Raider{}
+		err = rows.StructScan(&g)
+		if err != nil {
+			log.Println(err)
+			return nil, count, err
+		}
+		list = append(list, g)
+
+	}
+
+	countSql := `select count(*) from raiders`
+	err = conn.Get(&count,countSql)
+
+	return list, count,  nil
 }

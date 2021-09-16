@@ -41,6 +41,8 @@ func main() {
 	app.GET("/guildmates/:page/:size", guildmateController.ReturnGuildmatesPage)
 
 	app.GET("/raiders", raiderController.ReturnRaiders)
+	app.GET("/raiders/:page", raiderController.ReturnRaidersPage)
+	app.GET("/raiders/:page/:size", raiderController.ReturnRaidersPage)
 	app.POST("/raiders", raiderController.CreateRaider)
 	app.DELETE("/raiders/delete/:id", raiderController.DeleteRaider)
 
