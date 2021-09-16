@@ -7,6 +7,9 @@ import styles from "../../pages/guild/guild-page.module.scss";
 import Modal from "react-modal";
 import {raidEventsSelector} from "../../selectors/raid-event-selector";
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import Select from "@material-ui/core/Select/Select";
+import {MenuItem} from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
 
 const customStyles = {
     content: {
@@ -68,15 +71,19 @@ export const CreateRaidComponent: React.FC<any> = () => {
             <div>
                 <p>Дата: <input type="Date" onChange={DataChange}/></p>
                 <p>Id: <input type="number" placeholder="Введите id" onChange={IdChange}/></p>
-                <p>Час: <select onChange={HoursChange}>
+                <p>Час: <FormControl>
+                    <Select defaultValue={"Не выбрано"} onChange={HoursChange}>
                     {["Не выбрано",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].map((n:number) =>
-                        <option value={n}>{n}</option>)}
-                </select>
+                        <MenuItem value={n}>{n}</MenuItem>)}
+                </Select>
+                </FormControl>
                 </p>
-                <p>Минуты: <select onChange={MinutesChange}>
+                <p>Минуты: <FormControl>
+                    <Select defaultValue={"Не выбрано"} onChange={MinutesChange}>
                     {["Не выбрано",0,5,10,15,20,25,30,35,40,45,50,55].map((n:number) =>
-                        <option value={n}>{n}</option>)}
-                </select>
+                        <MenuItem value={n}>{n}</MenuItem>)}
+                </Select>
+                </FormControl>
                 </p>
                 <p>Описание: <input type="string" placeholder="Введите описание" onChange={DescriptionChange}/></p>
             </div>

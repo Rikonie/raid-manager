@@ -5,7 +5,8 @@ import {combineReducers} from "redux";
 
 const raidersList = createReducer<Raider[]>(null)
     .handleAction(Actions.raider.loadRaiders.success, (state, action) => {
-        return action.payload;
+        console.log(action.payload.raiders);
+        return action.payload.raiders;
     })
     .handleAction(Actions.raider.deleteRaider.success, (state : Raider[], action) => {
         const raider = state.find(r=>r.id == action.payload);
@@ -33,8 +34,14 @@ const createRaiderStatus = createReducer<string>(null)
         return null
     });
 
+const raiderCount = createReducer<number>(0)
+    .handleAction(Actions.raider.loadRaiders.success, (state, action) => {
+        return  action.payload.count;
+    });
+
 export const raidersReducer = () =>
     combineReducers({
         raidersList,
-        createRaiderStatus
+        createRaiderStatus,
+        raiderCount
     });

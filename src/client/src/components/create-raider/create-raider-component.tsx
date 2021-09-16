@@ -2,13 +2,16 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {Actions} from "../../store/actions";
 import {Raider} from "../../models/raider";
-import {ClassSelectComponent} from "../class-select/class-select-component";
 import Button from '@material-ui/core/Button';
-import {RankSelectComponent} from "../rank-select/rank-select-component";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import {Clazzes} from "../../models/enums/clazzes";
+import Select from "@material-ui/core/Select/Select";
+import {MenuItem} from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
+import {Ranks} from "../../models/enums/ranks";
 
 export const CreateRaiderComponent: React.FC<any> = () => {
-    const [name, setName] = useState<string>('');
+    const [name, setName] = useState<string | null>(null);
     const [id, setId] = useState<number>(0);
     const [classId, setClassId] = useState<number>(0);
     const [rank, setRank] = useState<number>(-1);
@@ -29,17 +32,40 @@ export const CreateRaiderComponent: React.FC<any> = () => {
         setId(parseInt(event.currentTarget.value))
     };
 
+    const classNames: string[] = Object.keys(Clazzes).map(key => Clazzes[key])
+        .filter(value => typeof value === 'string') as string[];
+
+    const onClassSelect = (event) => {
+        setClassId(parseInt(event.target.value));
+    };
+
+    const rankNames: string[] = Object.keys(Ranks).map(key => Ranks[key])
+        .filter(value => typeof value === 'string') as string[];
+
+    const onRankSelect = (event) => {
+        setRank(parseInt(event.target.value));
+    };
+
     return <>
         <div>
             <p>Ник: <input type="text" placeholder="Введите ник" onChange={NameChange}/></p>
-            <p>Класс: <ClassSelectComponent onSelect={(e) => {
-                setClassId(e)
-            }}/></p>
-            <p>Звание: <RankSelectComponent onSelect={(e) =>{
-            setRank(e)
-            }}/></p>
+            <p>Класс: <FormControl>
+                <Select defaultValue={0} onChange={onClassSelect}>
+                    {classNames.map((k: string) =>
+                        <MenuItem value={Clazzes[k]}>{k}</MenuItem>
+                    )}
+                </Select>
+            </FormControl>
+            </p>
+            <p>Звание: <FormControl>
+                <Select defaultValue={-1} onChange={onRankSelect}>
+                    {rankNames.map((k: string) =>
+                        <MenuItem value={Ranks[k]}>{k}</MenuItem>
+                    )}
+                </Select>
+            </FormControl></p>
             <p>id: <input type="number" placeholder="Введите id" onChange={IdChange}/></p>
         </div>
-        <Button variant="contained" color="primary" disabled={(classId == 0) || (rank == -1)}  onClick={create} title={'Создать рейдера'} startIcon={<PersonAddIcon/>}/>
+        <Button variant="contained" color="primary" disabled={(classId == 0) || (rank == -1) || (name == null)}  onClick={create} title={'Создать рейдера'} startIcon={<PersonAddIcon/>}/>
     </>
 };
