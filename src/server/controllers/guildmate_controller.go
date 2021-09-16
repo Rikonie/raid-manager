@@ -43,15 +43,15 @@ func (gc GuildmateController) ReturnGuildmatesPage(c echo.Context) error {
 		return errors.New("please choose reasonable values of page and size")
 	}
 
-	guildmates,count, err := gc.repository.GetPage(size, page)
+	guildmates, count, err := gc.repository.GetPage(size, page)
 	if err == nil {
 
 		data:= struct {
-			guildmates []models.Guildmate
-			count int
+			Guildmates []models.Guildmate `json:"guildmates"`
+			Count int `json:"count"`
 		}{
-			guildmates: guildmates,
-			count: count,
+			Guildmates: guildmates,
+			Count: count,
 		}
 
 		c.JSON(http.StatusOK, data)
