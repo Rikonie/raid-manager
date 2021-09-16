@@ -3,8 +3,9 @@ import {useDispatch} from "react-redux";
 import {Actions} from "../../store/actions";
 import {Raider} from "../../models/raider";
 import {ClassSelectComponent} from "../class-select/class-select-component";
-import {ButtonComponent} from "../shared/button/button";
+import Button from '@material-ui/core/Button';
 import {RankSelectComponent} from "../rank-select/rank-select-component";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 export const CreateRaiderComponent: React.FC<any> = () => {
     const [name, setName] = useState<string>('');
@@ -39,6 +40,6 @@ export const CreateRaiderComponent: React.FC<any> = () => {
             }}/></p>
             <p>id: <input type="number" placeholder="Введите id" onChange={IdChange}/></p>
         </div>
-        <ButtonComponent disabled={(classId == 0) || (rank == -1)}  onClick={create} title={'Создать рейдера'}/>
+        <Button variant="contained" color="primary" disabled={(classId == 0) || (rank == -1)}  onClick={create} title={'Создать рейдера'} startIcon={<PersonAddIcon/>}/>
     </>
 };

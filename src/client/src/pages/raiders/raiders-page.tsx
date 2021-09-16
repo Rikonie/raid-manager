@@ -8,7 +8,8 @@ import {RaidersComponent} from "../../components/raiders/raiders-page-component"
 import {PageComponent} from "../../components/shared/pagination/pages-button-select-component";
 import Modal from "react-modal";
 import styles from "../guild/guild-page.module.scss";
-import {ButtonComponent} from "../../components/shared/button/button";
+import Button from '@material-ui/core/Button';
+import {Paper, TableContainer} from "@material-ui/core";
 
 const customStyles = {
     content: {
@@ -46,15 +47,16 @@ export const RaidersPage = () => {
     };
 
     return (
-        <div>
+        <TableContainer component={Paper}>
             <PageComponent page={page} pageChange={pageChange}/>
+            <div>Рейдовый состав</div>
             {raiders? <div>
                 <RaidersComponent raiders={raiders} deleteRaiderClick={deleteRaider}/>
             </div> : <div>loading</div>}
             <Modal style={customStyles} onRequestClose={clear} isOpen={!!deleteRaiderStatus}>
                 <div className={styles.error}>{deleteRaiderStatus}</div>
-                <ButtonComponent onClick={clear}>Ok</ButtonComponent>
+                <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
             </Modal>
-        </div>
+        </TableContainer>
     );
 };

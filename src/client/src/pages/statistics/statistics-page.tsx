@@ -1,5 +1,6 @@
 import React from "react";
+import { Container } from "@material-ui/core";
 
 export const StatisticsPage = () => {
     return (
-        <div>Это статистика</div>)}
+        <Container>Это статистика</Container>)};

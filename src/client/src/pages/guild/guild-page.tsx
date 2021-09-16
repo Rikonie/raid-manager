@@ -13,7 +13,9 @@ import {PageComponent} from "../../components/shared/pagination/pages-button-sel
 import {Raider} from "../../models/raider";
 import {createRaiderStatusSelector} from "../../selectors/rader-selector";
 import Modal from "react-modal";
-import {ButtonComponent} from "../../components/shared/button/button";
+import Button from '@material-ui/core/Button';
+import {Paper, TableContainer} from "@material-ui/core";
+
 
 const customStyles = {
     content: {
@@ -52,20 +54,18 @@ export const GuildPage = () => {
        dispatch(Actions.raider.clearCreateRaider());
     };
 
-
-
     return (
-        <div className={styles.bla}>
+        <TableContainer component={Paper}>
             <PageComponent page={page} pageChange={pageChange}/>
             {guild? <div>
                 <GuildComponent name={guild.name} faction={guild.faction} id={guild.id} realm={guild.realm}>
                 </GuildComponent></div> :<div>Loading</div>}
+            <div>Состав гильдии</div>
                 <GuildmatesComponent guildmates={guildmates} createRaiderClick={createRaider}/>
             <Modal style={customStyles} onRequestClose={clear} isOpen={!!createRaiderStatus}>
                 <div className={styles.error}>{createRaiderStatus}</div>
-                <ButtonComponent onClick={clear}>Ok</ButtonComponent>
+                <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
             </Modal>
-
-        </div>
+        </TableContainer>
     );
 };
