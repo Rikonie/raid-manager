@@ -33,10 +33,11 @@ func (rr GuildmateRepository) GetAll() ([]models.Guildmate, error) {
 	return guildmates, nil
 }
 
-func (rr GuildmateRepository) GetPage(size int, page int) ([]models.Guildmate, error) {
+func (rr GuildmateRepository) GetPage(size int, page int) ([]models.Guildmate, int, error) {
 	conn, err := sqlx.Connect("pgx", rr.connectionString)
+	count:= 0;
 	if err != nil {
-		return nil, err
+		return nil, count, err
 	}
 	defer conn.Close()
 
@@ -48,20 +49,23 @@ func (rr GuildmateRepository) GetPage(size int, page int) ([]models.Guildmate, e
 	rows, err := conn.Queryx(SQL, offset, size)
 	if err != nil {
 		log.Println(err)
-		return nil, err
+		return nil, count, err
 	}
 	for rows.Next() {
 		g :=models.Guildmate{}
 		err = rows.StructScan(&g)
 		if err != nil {
 			log.Println(err)
-			return nil, err
+			return nil, count, err
 		}
 		list = append(list, g)
 
 	}
 
-	return list, nil
+	countSql := `select count(*) from guildmates`
+	err = conn.Get(&count,countSql)
+
+	return list, count,  nil
 }
 
 func (rr GuildmateRepository) Save(guildmate models.Guildmate) ([]models.Guildmate, error) {
