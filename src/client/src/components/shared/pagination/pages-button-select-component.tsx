@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./pages-button-select-component.module.scss"
-import {ButtonComponent} from "../button/button";
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import Button from '@material-ui/core/Button';
 
 
 class pageProps {
@@ -20,9 +22,9 @@ export const PageComponent: React.FC<pageProps> = ({page, pageChange}) => {
 
     return (
         <div>
-            <ButtonComponent disabled={(page <= 1)} onClick={clickBack}>Назад</ButtonComponent>
+            <Button variant="contained" color="primary" disabled={(page <= 1)} onClick={clickBack} startIcon={<NavigateBeforeIcon/>}>Назад</Button>
             <span className={styles.number}>{page}</span>
-            <ButtonComponent onClick={clickOnWard}>Вперед</ButtonComponent>
+            <Button variant="contained" color="primary" onClick={clickOnWard} endIcon={<NavigateNextIcon>Вперед</NavigateNextIcon>}>Вперед</Button>
         </div>
     );
 };

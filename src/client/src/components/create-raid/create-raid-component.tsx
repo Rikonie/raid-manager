@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Actions} from "../../store/actions";
-import {ButtonComponent} from "../shared/button/button";
+import Button from '@material-ui/core/Button';
 import {Raid} from "../../models/raidEvent";
 import styles from "../../pages/guild/guild-page.module.scss";
 import Modal from "react-modal";
 import {raidEventsSelector} from "../../selectors/raid-event-selector";
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const customStyles = {
     content: {
@@ -85,14 +86,14 @@ export const CreateRaidComponent: React.FC<any> = () => {
             <div>
                 {showDescription ? description: null}
             </div>
-            <ButtonComponent disabled={(description == null) ||
+            <Button variant="contained" color="primary" disabled={(description == null) ||
             (raidDate == null) ||
             (raidMinutes == null) ||
             (raidHours == null) ||
-            (id == null)} onClick={create} title={'Создать событие'}/>
+            (id == null)} onClick={create} title={'Создать событие'} startIcon={<AddBoxIcon/>}/>
             <Modal style={customStyles} onRequestClose={clear} isOpen={!!createRaidStatus}>
                 <div className={styles.error}>{createRaidStatus}</div>
-                <ButtonComponent onClick={clear}>Ok</ButtonComponent>
+                <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
             </Modal>
         </>
     )

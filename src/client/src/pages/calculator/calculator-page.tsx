@@ -1,14 +1,7 @@
 import React from "react";
-import {RaidersService} from "../../services/raider-service";
-import {HttpClient} from "../../services/api/http-client";
+import { Container } from "@material-ui/core";
 
 export const CalculatorPage = () => {
 
-    const test = () =>{
-        const httpClient = new HttpClient('http://localhost:8081');
-        const s = new RaidersService(httpClient);
-        s.CreateEventRaider().then()
-    }
-
     return (
-        <div><button onClick={()=>test()}>123 123</button>.</div>)}
+        <Container>Калькулятор</Container>)};

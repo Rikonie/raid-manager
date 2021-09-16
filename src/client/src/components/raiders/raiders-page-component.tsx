@@ -3,8 +3,9 @@ import {RaidersNameComponent} from "./raiders-name-component";
 import React from "react";
 import {RaidersClassComponent} from "./raiders-class-component";
 import {RaidersRankComponent} from "./raiders-rank-component";
-import {ButtonComponent} from "../shared/button/button";
-
+import Button from '@material-ui/core/Button';
+import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 
 export class RaidersProps {
     raiders?: Raider [];
@@ -15,20 +16,23 @@ export const RaidersComponent: React.FC<RaidersProps> = ({raiders, deleteRaiderC
     return (
         <>
             {raiders? <>
-                <table>
-                    <caption>Рейдовый состав</caption>
-                    <tr>
-                        <td>Ник</td>
-                        <td>Класс</td>
-                        <td>Звание</td>
-                    </tr>
-                    {raiders.map((g) => <tr>
-                        <td><RaidersNameComponent name={g.name} classId={g.classId}/></td>
-                        <td><RaidersClassComponent classId={g.classId}/></td>
-                        <td><RaidersRankComponent rank={g.rank}/></td>
-                        <td><ButtonComponent  onClick={()=>deleteRaiderClick(g)}>Удалить</ButtonComponent></td>
-                    </tr>)}
-                </table>
+                <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Ник</TableCell>
+                        <TableCell>Класс</TableCell>
+                        <TableCell>Звание</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {raiders.map((g) => <TableRow>
+                        <TableCell><RaidersNameComponent name={g.name} classId={g.classId}/></TableCell>
+                        <TableCell><RaidersClassComponent classId={g.classId}/></TableCell>
+                        <TableCell><RaidersRankComponent rank={g.rank}/></TableCell>
+                        <TableCell><Button  variant="contained" color="primary" onClick={()=>deleteRaiderClick(g)} startIcon={<PersonAddDisabledIcon />}>Удалить</Button></TableCell>
+                    </TableRow>)}
+                </TableBody>
+                </Table>
             </> : <div>loading</div>}
             </>
     );
