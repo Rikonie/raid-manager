@@ -8,6 +8,7 @@ import (
 	"main/database"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
@@ -63,6 +64,7 @@ func main() {
 }
 
 func hello(c echo.Context) error {
+	time.Sleep(1 * time.Second)
 	return c.String(http.StatusOK, "Hello, World!")
 }
 

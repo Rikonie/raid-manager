@@ -11,25 +11,14 @@ import {GuildmatesComponent} from "../../components/guildmates/guildmates-сompo
 import {GuildComponent} from "../../components/guld/guild-component";
 import {Raider} from "../../models/raider";
 import {createRaiderStatusSelector} from "../../selectors/rader-selector";
-import Modal from "react-modal";
 import Button from '@material-ui/core/Button';
-import {MenuItem, Paper, TableContainer} from "@material-ui/core";
+import {Box, MenuItem, Modal, Paper, TableContainer, Typography} from "@material-ui/core";
 import {Pagination} from '@material-ui/lab'
 import InputLabel from "@material-ui/core/InputLabel/InputLabel";
 import Select from "@material-ui/core/Select/Select";
 import FormControl from "@material-ui/core/FormControl";
+import {style} from "../../styles/modal";
 
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
 
 export const GuildPage = () => {
 
@@ -85,9 +74,13 @@ export const GuildPage = () => {
                 </GuildComponent></div> :<div>Loading</div>}
             <div>Состав гильдии</div>
                 <GuildmatesComponent guildmates={guildmates} createRaiderClick={createRaider}/>
-            <Modal style={customStyles} onRequestClose={clear} isOpen={!!createRaiderStatus}>
-                <div className={styles.error}>{createRaiderStatus}</div>
+            <Modal onClose={clear} open={!!createRaiderStatus}
+                   aria-labelledby="modal-modal-title"
+                   aria-describedby="modal-modal-description">
+                <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">{createRaiderStatus}</Typography>
                 <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
+                </Box>
             </Modal>
         </TableContainer>
     );

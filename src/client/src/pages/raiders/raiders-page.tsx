@@ -5,14 +5,13 @@ import {Raider} from "../../models/raider";
 import {useAppDispatch} from "../../store/app-dispatch";
 import {Actions} from "../../store/actions";
 import {RaidersComponent} from "../../components/raiders/raiders-page-component";
-import Modal from "react-modal";
-import styles from "../guild/guild-page.module.scss";
 import Button from '@material-ui/core/Button';
-import {MenuItem, Paper, TableContainer} from "@material-ui/core";
+import {Box, MenuItem, Modal, Paper, TableContainer, Typography} from "@material-ui/core";
 import {Pagination} from "@material-ui/lab";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import {style} from "../../styles/modal";
 
 const customStyles = {
     content: {
@@ -77,9 +76,13 @@ export const RaidersPage = () => {
                 {raiders ? <div>
                     <RaidersComponent raiders={raiders} deleteRaiderClick={deleteRaider}/>
                 </div> : <div>loading</div>}
-                <Modal style={customStyles} onRequestClose={clear} isOpen={!!deleteRaiderStatus}>
-                    <div className={styles.error}>{deleteRaiderStatus}</div>
+                <Modal onClose={clear} open={!!deleteRaiderStatus}
+                       aria-labelledby="modal-modal-title"
+                       aria-describedby="modal-modal-description">
+                    <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">{deleteRaiderStatus}</Typography>
                     <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
+                    </Box>
                 </Modal>
             </TableContainer>
         );

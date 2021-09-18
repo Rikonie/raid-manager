@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import {Clazzes} from "../../models/enums/clazzes";
 import Select from "@material-ui/core/Select/Select";
-import {MenuItem} from "@material-ui/core";
+import {Box, MenuItem, TextField} from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import {Ranks} from "../../models/enums/ranks";
 
@@ -48,7 +48,8 @@ export const CreateRaiderComponent: React.FC<any> = () => {
 
     return <>
         <div>
-            <p>Ник: <input type="text" placeholder="Введите ник" onChange={NameChange}/></p>
+            <Box component="form">
+            <p>Ник: <TextField id="filled-basic" label="Введите ник" variant="filled" size="small" defaultValue={null} onChange={NameChange}/></p>
             <p>Класс: <FormControl>
                 <Select defaultValue={0} onChange={onClassSelect}>
                     {classNames.map((k: string) =>
@@ -64,8 +65,9 @@ export const CreateRaiderComponent: React.FC<any> = () => {
                     )}
                 </Select>
             </FormControl></p>
-            <p>id: <input type="number" placeholder="Введите id" onChange={IdChange}/></p>
+            <p>id: <TextField id="filled-basic" label="Введите id" variant="filled" type="number" size="small" onChange={IdChange}/></p>
+            </Box>
         </div>
-        <Button variant="contained" color="primary" disabled={(classId == 0) || (rank == -1) || (name == null)}  onClick={create} title={'Создать рейдера'} startIcon={<PersonAddIcon/>}/>
+        <Button variant="contained" color="primary" disabled={(classId == 0) || (rank == -1) || (name == "")}  onClick={create} title={'Создать рейдера'} startIcon={<PersonAddIcon/>}/>
     </>
 };
