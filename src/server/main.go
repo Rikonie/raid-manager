@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 	"main/controllers"
 	"main/database"
 	"net/http"
 	"os"
 	"time"
+	"github.com/jmoiron/sqlx"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -27,6 +28,8 @@ func main() {
 	raiderRepository := database.NewRaiderRepository(CONNECTION_STRING)
 	eventRepository := database.NewGuildEventRepository(CONNECTION_STRING)
 
+	conn, _ := sqlx.Connect("pgx", CONNECTION_STRING)
+	concurrentRaiderRepository := database.NewConcurrentRaiderRepository(*conn)
 
 	//Controllers
 	guildController := controllers.NewGuildController(guildRepository)
@@ -35,6 +38,8 @@ func main() {
 	eventController := controllers.NewGuildEventController(eventRepository)
 	//updateDbController := controllers.NewUpdateDbController(guildmateRepository)
 
+	craiderController := controllers.NewConcurrentRaiderController(concurrentRaiderRepository)
+
 	// Routes
 	app.GET("/", hello)
 	app.GET("/guildmates", guildmateController.ReturnGuildmates)
@@ -42,8 +47,12 @@ func main() {
 	app.GET("/guildmates/:page/:size", guildmateController.ReturnGuildmatesPage)
 
 	app.GET("/raiders", raiderController.ReturnRaiders)
+	app.GET("/raiders/:page", raiderController.ReturnRaidersPage)
+	app.GET("/raiders/:page/:size", raiderController.ReturnRaidersPage)
 	app.POST("/raiders", raiderController.CreateRaider)
 	app.DELETE("/raiders/delete/:id", raiderController.DeleteRaider)
+
+	app.GET("/craiders", craiderController.ReturnRaiders)
 
 	app.GET("/guilds", guildController.ReturnGuilds)
 	app.GET("/guild", guildController.ReturnGuild)
@@ -70,6 +79,5 @@ func hello(c echo.Context) error {
 
 func CustomHTTPErrorHandler(err error, c echo.Context) {
 	c.JSON(http.StatusInternalServerError, err)
-	fmt.Fprintf(os.Stderr, "\nError via request " + c.Path() + " :" , err)
+	fmt.Fprintf(os.Stderr, "\nError via request "+c.Path()+" :", err)
 }
-
