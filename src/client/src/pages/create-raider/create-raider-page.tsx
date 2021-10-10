@@ -4,20 +4,9 @@ import {useSelector} from "react-redux";
 import {createRaiderStatusSelector} from "../../selectors/rader-selector";
 import {Actions} from "../../store/actions";
 import {useAppDispatch} from "../../store/app-dispatch";
-import Modal from "react-modal";
-import styles from "../guild/guild-page.module.scss";
 import Button from '@material-ui/core/Button';
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
+import {Box, Modal, Typography} from "@material-ui/core";
+import {style} from "../../styles/modal";
 
 export const CreateRaiderPage = () => {
 
@@ -30,8 +19,12 @@ export const CreateRaiderPage = () => {
     return (
         <div>
             <CreateRaiderComponent/>
-            <Modal style={customStyles} onRequestClose={clear} isOpen={!!createRaiderStatus}>
-                <div className={styles.error}>{createRaiderStatus}</div>
+            <Modal onClose={clear} open={!!createRaiderStatus}
+                   aria-labelledby="modal-modal-title"
+                   aria-describedby="modal-modal-description">
+                <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">{createRaiderStatus}</Typography>
                 <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
+                </Box>
             </Modal>
         </div>)};

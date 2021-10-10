@@ -4,14 +4,26 @@ import {Actions} from "../store/actions";
 import {catchError, filter, map, mergeMap, switchMap} from "rxjs/operators";
 import {of, from} from "rxjs";
 
-const raiderPageOpened: RootEpic = (action$, _, {raidersService}) =>
+const raiderPageOpened: RootEpic = (action$, _, {}) =>
     action$.pipe(
         filter(isActionOf(Actions.raider.raiderOpened)),
-        switchMap((action) => {
-            return raidersService.GetRaidersInfoPage(1).then(r => Actions.raider.loadRaiders.success(r));
+        map((action) => {
+            return Actions.raider.loadRaiders.request({page:1, size:10})
         }),
         catchError(x=>{
             return of(Actions.raider.loadRaiders.failure(x));
+        })
+    );
+
+const raiderPageLoad: RootEpic = (action$, _, {raidersService}) =>
+    action$.pipe(
+        filter(isActionOf(Actions.raider.loadRaiders.request)),
+        switchMap((action) => {
+            return raidersService.GetRaidersInfoPage(action.payload.page, action.payload.size).then(r => Actions.raider.loadRaiders.success(r))
+        }),
+        catchError(x=>{
+            console.log(x);
+            return of(Actions.raider.loadRaiders.failure(x))
         })
     );
 
@@ -54,4 +66,5 @@ export const raiderEpics = [
     raiderPageOpened,
     raiderCreate,
     raiderDelete,
+    raiderPageLoad
 ];

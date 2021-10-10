@@ -32,13 +32,13 @@ const loadGuildmatesPage = createAsyncAction(
     '@@load-guildmate/request',
     '@@load-guildmate/success',
     '@@load-guildmate/failure'
-)<{page: number}, Guildmate[], Error>();
+)<{page: number, size: number}, {guildmates: Guildmate[], count: number}, Error>();
 
 const loadRaiders = createAsyncAction(
     '@@load-raider/request',
     '@@load-raider/success',
     '@@load-raider/failure'
-)<{page: number}, Raider[], Error>();
+)<{page: number, size: number}, {raiders: Raider[], count: number}, Error>();
 
 const createRaider = createAsyncAction(
     '@@create-raider/request',

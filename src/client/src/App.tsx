@@ -4,9 +4,7 @@ import {RootConfig} from "./root/configure-root";
 import { BrowserRouter} from 'react-router-dom';
 import {MainRouter} from "./routers/main-router";
 import {Provider} from "react-redux";
-import Modal from "react-modal";
 
-Modal.setAppElement('#root');
 
 const App: React.FC<RootConfig> = ({store}) => {
     return (

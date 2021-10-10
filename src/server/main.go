@@ -6,7 +6,7 @@ import (
 	"main/database"
 	"net/http"
 	"os"
-
+	"time"
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -73,6 +73,7 @@ func main() {
 }
 
 func hello(c echo.Context) error {
+	time.Sleep(1 * time.Second)
 	return c.String(http.StatusOK, "Hello, World!")
 }
 

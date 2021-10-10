@@ -16,7 +16,7 @@ const guildmatePageOpened: RootEpic = (action$, _, {}) =>
     action$.pipe(
         filter(isActionOf(Actions.guild.guildOpened)),
         map((action) => {
-            return  Actions.guildmate.loadGuildmatesPage.request({page:1})
+            return  Actions.guildmate.loadGuildmatesPage.request({page:1, size:10})
         }),
         catchError(x=>{
             return of(Actions.guildmate.loadGuildmatesPage.failure(x))
@@ -27,7 +27,7 @@ const guildmatePageLoad: RootEpic = (action$, _, {guildmatesService}) =>
     action$.pipe(
         filter(isActionOf(Actions.guildmate.loadGuildmatesPage.request)),
         switchMap((action) => {
-            return guildmatesService.GetGuildmatesInfoPage(action.payload.page).then(r => Actions.guildmate.loadGuildmatesPage.success(r))
+            return guildmatesService.GetGuildmatesInfoPage(action.payload.page, action.payload.size).then(r => Actions.guildmate.loadGuildmatesPage.success(r))
         }),
         catchError(x=>{
             return of(Actions.guildmate.loadGuildmatesPage.failure(x))
