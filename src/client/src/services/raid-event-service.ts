@@ -25,7 +25,8 @@ export class RaidEventService implements IRaidEventService{
                 return new Raid(
                     new Date(i?.dateTimeStart),
                     i?.description,
-                    i?.id
+                    i?.id,
+                    i?.name ? i?.name : "Default raid name"
                 )
             })
         } )

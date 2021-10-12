@@ -99,7 +99,9 @@ export const CreateRaidComponent: React.FC<any> = () => {
             (raidDate == null) ||
             (raidMinutes == null) ||
             (raidHours == null) ||
-            (id == null) || (description == "")} onClick={create} title={'Создать событие'} startIcon={<AddBoxIcon/>}/>
+            (id == null) || (description == "")} onClick={create} title={'Создать событие'} startIcon={<AddBoxIcon/>}>
+                Создать
+            </Button>
             <Modal onClose={clear} open={!!createRaidStatus}
                    aria-labelledby="modal-modal-title"
                    aria-describedby="modal-modal-description">

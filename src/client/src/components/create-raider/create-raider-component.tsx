@@ -68,6 +68,9 @@ export const CreateRaiderComponent: React.FC<any> = () => {
             <p>id: <TextField id="filled-basic" label="Введите id" variant="filled" type="number" size="small" onChange={IdChange}/></p>
             </Box>
         </div>
-        <Button variant="contained" color="primary" disabled={(classId == 0) || (rank == -1) || (name == "")}  onClick={create} title={'Создать рейдера'} startIcon={<PersonAddIcon/>}/>
+        <Button variant="contained" color="primary"
+                disabled={(classId == 0) || (rank == -1) || (name == "")}
+                onClick={create} title={'Создать рейдера'} startIcon={<PersonAddIcon/>}>Создать
+        </Button>
     </>
 };

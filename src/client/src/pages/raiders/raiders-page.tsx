@@ -12,17 +12,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import {style} from "../../styles/modal";
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
+import {CreateRaiderComponent} from "../../components/create-raider/create-raider-component";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import styles from ".//raiders-page.module.scss";
 
 export const RaidersPage = () => {
 
@@ -32,6 +24,7 @@ export const RaidersPage = () => {
     let raiders = useSelector(raidersSelector) as Raider[];
     let countRaiders = useSelector(raiderCountSelector) as number;
     let deleteRaiderStatus = useSelector(createRaiderStatusSelector);
+    let [openModal, setOpenModal] = useState(false);
 
     let selectArray = [10, 20, 30, 40, 50];
 
@@ -50,14 +43,21 @@ export const RaidersPage = () => {
     let clear = () => {
         dispatch(Actions.raider.clearCreateRaider());
     };
-        let onSelect = (event) => {
-            dispatch(Actions.raider.loadRaiders.request({page: 1, size: (parseInt(event.target.value))}
+    let onSelect = (event) => {
+        dispatch(Actions.raider.loadRaiders.request({page: 1, size: (parseInt(event.target.value))}
                 )
-            );
-            console.log(event.target.value);
-            setPageSize(parseInt(event.target.value));
-            setPage(1);
-        };
+        );
+        setPageSize(parseInt(event.target.value));
+        setPage(1);
+    };
+
+    let modal = () => {
+      setOpenModal(true)
+    };
+
+    let closeModal = () => {
+        setOpenModal(false)
+    };
 
         return (
             <TableContainer component={Paper}>
@@ -72,7 +72,12 @@ export const RaidersPage = () => {
                             <MenuItem value={n}>{n}</MenuItem>))}
                     </Select>
                 </FormControl>
-                <div>Рейдовый состав</div>
+                <div>Рейдовый состав
+                    <span className={styles.createRaider}>
+                    <Button variant="contained" color="primary" onClick={modal} startIcon={<PersonAddIcon/>}>Создать рейдера
+                    </Button>
+                    </span>
+                </div>
                 {raiders ? <div>
                     <RaidersComponent raiders={raiders} deleteRaiderClick={deleteRaider}/>
                 </div> : <div>loading</div>}
@@ -82,6 +87,16 @@ export const RaidersPage = () => {
                     <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">{deleteRaiderStatus}</Typography>
                     <Button variant="contained" color="primary" onClick={clear}>Ok</Button>
+                    </Box>
+                </Modal>
+                <Modal onClose={closeModal} open={openModal}
+                       aria-labelledby="modal-modal-title"
+                       aria-describedby="modal-modal-description">
+                    <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            <CreateRaiderComponent/>
+                            <Button variant="contained" color="primary" onClick={closeModal} className={styles.closeModal}>Закрыть</Button>
+                        </Typography>
                     </Box>
                 </Modal>
             </TableContainer>
