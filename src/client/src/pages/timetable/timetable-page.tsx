@@ -18,6 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const localizer = momentLocalizer(moment);
 
 export const TimetablePage = () => {
+
     let events = useSelector(eventSelector) as RaidEvent[];
     let [openModal, setOpenModal] = useState<boolean>(false);
     let [selectedEvent, setSelectedEvent] = useState<RaidEvent| null>(null);
@@ -67,7 +68,6 @@ export const TimetablePage = () => {
         return confirmation != 'Удалить';
     };
 
-
     return (
         <div className={styles.content}>
             <span className={styles.createRaid}>
@@ -85,24 +85,6 @@ export const TimetablePage = () => {
                 style={{ height: 500 }}
                 onSelectEvent={($event: any)=>{setSelectedEvent($event.event)}}
             />
-            <Modal open={!!selectedEvent} onClose={()=>setSelectedEvent(null)}
-                   aria-labelledby="modal-modal-title"
-                   aria-describedby="modal-modal-description">
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        <div>Название: {selectedEvent?.name}<br/>
-                            Описание: {selectedEvent?.description}<br/>
-                            Дата: {selectedEvent?.raidDate.toDateString()}<br/>
-                            Начало: {selectedEvent?.raidDate.toTimeString()}<br/>
-                        </div>
-                        <Button variant="contained" color="primary"
-                                onClick={deleteOpenModal} startIcon={<DeleteIcon/>}>
-                            Удалить событие</Button>
-                        <Button variant="contained" color="primary" onClick={()=>setSelectedEvent(null)}
-                                className={styles.closeModal}>Закрыть</Button>
-                    </Typography>
-                </Box>
-            </Modal>
                 <span className={styles.description}>
                     Среда: 20:00 — 23:00 (героик) <br/>
                     Четверг: 20:00 — 23:00 (героик)<br/>
@@ -145,6 +127,24 @@ export const TimetablePage = () => {
                         </Button>
                         <Button variant="contained" color="primary" onClick={deleteCloseModal} className={styles.closeModal}>Закрыть
                         </Button>
+                    </Typography>
+                </Box>
+            </Modal>
+            <Modal open={!!selectedEvent} onClose={()=>setSelectedEvent(null)}
+                   aria-labelledby="modal-modal-title"
+                   aria-describedby="modal-modal-description">
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        <div>Название: {selectedEvent?.name}<br/>
+                            Описание: {selectedEvent?.description}<br/>
+                            Дата: {selectedEvent?.raidDate.toDateString()}<br/>
+                            Начало: {selectedEvent?.raidDate.toTimeString()}<br/>
+                        </div>
+                        <Button variant="contained" color="primary"
+                                onClick={deleteOpenModal} startIcon={<DeleteIcon/>}>
+                            Удалить событие</Button>
+                        <Button variant="contained" color="primary" onClick={()=>setSelectedEvent(null)}
+                                className={styles.closeModal}>Закрыть</Button>
                     </Typography>
                 </Box>
             </Modal>
