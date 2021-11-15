@@ -75,22 +75,6 @@ export const SidebarComponent: React.FC<SidebarComponentProps> = ({toggleDrawer,
                         <ListItemText primary={"Калькулятор рейда"}/>
                     </ListItem>
                 </List>
-                <List>
-                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/create_raiders">
-                        <ListItemIcon>
-                            <GroupAddIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={"Создать рейдера"}/>
-                    </ListItem>
-                </List>
-                <List>
-                    <ListItem component={NavLink} activeClassName="Mui-selected" to="/create_raid">
-                        <ListItemIcon>
-                            <AddBoxIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={"Создать событие"}/>
-                    </ListItem>
-                </List>
             </Box>
         </Drawer>
     );

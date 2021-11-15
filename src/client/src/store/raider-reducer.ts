@@ -15,6 +15,11 @@ const raidersList = createReducer<Raider[]>(null)
             state.splice(index, 1);
         }
         return [...state];
+    })
+    .handleAction(Actions.raider.createRaider.success, (state : Raider[], action) => {
+
+        state.unshift(action.payload);
+        return [...state];
     });
 
 const createRaiderStatus = createReducer<string>(null)

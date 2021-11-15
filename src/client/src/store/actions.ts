@@ -44,7 +44,7 @@ const createRaider = createAsyncAction(
     '@@create-raider/request',
     '@@create-raider/success',
     '@@create-raider/failure'
-)<Raider, {}, Error>();
+)<Raider, Raider, Error>();
 
 const deleteRaider = createAsyncAction(
     '@@delete-raider/request',

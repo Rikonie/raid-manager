@@ -1,1 +1,23 @@
 @import '../../../node_modules/react-big-calendar/lib/sass/styles';
+
+.closeModal {
+  float: right;
+}
+
+.createRaid {
+display: block;
+  margin: 0 0 15px 0;
+}
+
+.content {
+  display: block;
+  margin: 15px 0 0 15px;
+}
+.calendar {
+  display: flex;
+}
+
+.description {
+  float: right;
+  margin: 0 0 0 30px;
+}
