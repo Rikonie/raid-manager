@@ -8,6 +8,7 @@ import {raidersReducer} from "../store/raider-reducer";
 import {raidEventReducer} from "../store/raid-event-reducer";
 
 export const rootReducer = () =>
+    ///Comment in main
     combineReducers({
         home: homeReducer(),
         guild: guildReducer(),
