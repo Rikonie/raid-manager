@@ -62,18 +62,6 @@ export const MainRouter: React.FC = () => {
                     </LayoutComponent>
                 </Route>
 
-                <Route path="/create_raiders">
-                    <LayoutComponent>
-                        <CreateRaiderPage/>
-                    </LayoutComponent>
-                </Route>
-
-                <Route path="/create_raid">
-                    <LayoutComponent>
-                        <CreateRaidPage/>
-                    </LayoutComponent>
-                </Route>
-
                 <Route component={NotFoundPage}>
                     <NotFoundPage/>
                 </Route>
