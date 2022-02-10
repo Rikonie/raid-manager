@@ -23,7 +23,7 @@ export class HttpClient {
     private _handleResponse = ({data}: AxiosResponse) => data;
 
     public get<ResponseType>(url: string, params: any) {
-        return this.instance.get<ResponseType>(url, {params},);
+        return this.instance.get<ResponseType>(url, {params});
     }
 
     public post<ResponseType>(url: string, params: any, headers?: any) {
@@ -45,6 +45,8 @@ export class HttpClient {
         console.log('headers', token);
         this.instance.interceptors.request.use(config => {
             config.headers['Authorization'] = 'Bearer ' + token;
+            config.headers['AllowOrigins'] = '*';
+            config.headers['AllowHeaders'] = '*';
             return config;
         });
     };

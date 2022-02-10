@@ -27,39 +27,18 @@ module.exports = {
                 loader: "ts-loader"
             },
             {
-                test: /\.(scss|css)$/,
-                exclude: [
-                    path.resolve(__dirname, "node_modules"),
-                ],
+                test: /\.s[ac]ss$/i,
                 use: [
-                    'style-loader',
+                    "style-loader",
+                    "css-loader",
                     {
-                        loader: 'css-loader',
+                        loader: "sass-loader",
                         options: {
-                            modules: true,
-                            camelCase: true,
-                            namedExport: true
+                            // Prefer `dart-sass`
+                            implementation: require.resolve("node-sass"),
                         },
-                    }, {
-                        loader: 'sass-loader',
-                    }],
-            },
-            {
-                test: /\.(scss|css)$/,
-                include: [
-                    path.resolve(__dirname, "node_modules"),
+                    },
                 ],
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            camelCase: true,
-                            namedExport: true
-                        },
-                    }, {
-                        loader: 'sass-loader',
-                    }],
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/i,

@@ -20,6 +20,7 @@ export async function configureRoot(): Promise<RootConfig> {
 
     const endpoint = await getConfig();
     const httpClient = new HttpClient(endpoint);
+    httpClient.setAuthHeaders('');
     const homeApi = new HomeApi(httpClient);
     const guildService = new GuildService(httpClient);
     const guildmatesService = new GuildmatesService(httpClient);
