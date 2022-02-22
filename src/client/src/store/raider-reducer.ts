@@ -20,7 +20,12 @@ const raidersList = createReducer<Raider[]>(null)
 
         state.unshift(action.payload);
         return [...state];
+    })
+    .handleAction(Actions.raider.loadAllRaiders.success, (state, action) => {
+        console.log(action.payload.raiders);
+        return action.payload.raiders;
     });
+
 
 const createRaiderStatus = createReducer<string>(null)
     .handleAction(Actions.raider.createRaider.success, () => {

@@ -58,6 +58,12 @@ const createRaid = createAsyncAction(
     '@@create-raid/failure'
 )<Raid, {}, Error>();
 
+const loadAllRaiders = createAsyncAction(
+    '@@load-all-raider/request',
+    '@@load-all-raider/success',
+    '@@load-all-raider/failure'
+)<{}, {raiders: Raider[]}, Error>();
+
 const login = createAction('@@login')<{ name: string, password: string }>();
 const emptyAction = createAction('@@empty-action')<{ text: string }>();
 const clearCreateRaider = createAction('@@clear-raider')();
@@ -83,7 +89,8 @@ export const Actions = {
         loadRaiders,
         createRaider,
         deleteRaider,
-        clearCreateRaider
+        clearCreateRaider,
+        loadAllRaiders
     },
     raidEvent: {
         createRaid,
